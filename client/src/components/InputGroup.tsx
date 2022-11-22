@@ -2,8 +2,6 @@ import * as React from 'react';
 import cls from 'classnames';
 
 interface InputGroupProps {
-  className?: string;
-  type?: string;
   placeholder?: string;
   value: string;
   error: string | undefined;
@@ -11,17 +9,15 @@ interface InputGroupProps {
 }
 
 const InputGroup: React.FC<InputGroupProps> = ({
-  className = 'mb-2',
-  type = 'text',
   placeholder = '',
   error,
   value,
   setValue,
 }) => {
   return (
-    <div className={className}>
+    <div className="mb-2">
       <input
-        type={type}
+        type="text"
         style={{ minWidth: 300 }}
         className={cls(
           `w-full p-3 transition duration-200 border border-gray-400 rounded bg-gray-50 focus:bg-white hover:bg-white`,
