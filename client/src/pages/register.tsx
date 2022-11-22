@@ -25,7 +25,7 @@ const register = () => {
       router.push('/login');
     } catch (error: any) {
       console.log('error:', error);
-      setErrors(error?.response?.data || {});
+      setErrors(error.response.data || {});
     }
   };
 
@@ -36,19 +36,19 @@ const register = () => {
           <h1 className="mb-2 text-lg font-medium">회원가입</h1>
           <form onSubmit={handleSubmit}>
             <InputGroup
-              placeholder="Email"
+              placeholder={'Email'}
               value={email}
               setValue={setEmail}
               error={errors.email}
             />
             <InputGroup
-              placeholder="Username"
+              placeholder={'Username'}
               value={username}
               setValue={setUsername}
               error={errors.username}
             />
             <InputGroup
-              placeholder="Password"
+              placeholder={'Password'}
               value={password}
               setValue={setPassword}
               error={errors.password}
