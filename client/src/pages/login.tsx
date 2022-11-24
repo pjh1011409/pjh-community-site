@@ -5,14 +5,18 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { useAuthDispatch } from '../context/auth';
+import { useAuthState } from '../context/auth';
 
 const login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<any>({});
+  const { authenticated } = useAuthState();
 
   const dispatch = useAuthDispatch();
   const router = useRouter();
+
+  if (authenticated) router.push('/');
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
