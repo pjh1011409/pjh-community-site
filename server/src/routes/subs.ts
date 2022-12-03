@@ -8,7 +8,6 @@ import Sub from '../entities/Sub';
 import { isEmpty } from 'class-validator';
 import User from '../entities/User';
 import { NextFunction } from 'express-serve-static-core';
-import { callbackify } from 'util';
 import path from 'path';
 import { unlinkSync } from 'fs';
 import { makeId } from '../utils/helpers';
@@ -51,9 +50,9 @@ const createSub = async (req: Request, res: Response, next) => {
   }
 };
 
-const topSubs = async (_: Request, res: Response) => {
+const topSubs = async (req: Request, res: Response) => {
   try {
-    const imageUrlExp = `COALESCE('${process.env.APP_URL}/images/' || s."imageUrn",'https://www.gravatar.com/avatar?d=mp&f=y')`;
+    const imageUrlExp = `COALESCE('${process.env.APP_URL}/images/' ||s."imageUrn",'https://www.gravatar.com/avatar?d=mp&f=y')`;
     const subs = await AppDataSource.createQueryBuilder()
       .select(
         `s.title, s.name, ${imageUrlExp} as "imageUrl", count(p.id) as "postCount"`
@@ -64,6 +63,7 @@ const topSubs = async (_: Request, res: Response) => {
       .orderBy(`"postCount"`, 'DESC')
       .limit(5)
       .execute();
+
     return res.json(subs);
   } catch (error) {
     console.log(error);
@@ -76,6 +76,18 @@ const getSub = async (req: Request, res: Response) => {
 
   try {
     const sub = await Sub.findOneByOrFail({ name });
+
+    const posts = await Post.find({
+      where: { subName: sub.name },
+      order: { createdAt: 'DESC' },
+      relations: ['comments', 'votes'],
+    });
+
+    sub.posts = posts;
+
+    if (res.locals.user) {
+      sub.posts.forEach(p => p.setUserVote(res.locals.user));
+    }
 
     return res.json(sub);
   } catch (error) {
@@ -166,7 +178,7 @@ const router = Router();
 
 router.get('/:name', userMiddleware, getSub);
 router.post('/', userMiddleware, authMiddleware, createSub);
-router.post('/sub/topSubs', topSubs);
+router.get('/sub/topSubs', topSubs);
 router.post(
   '/:name/upload',
   userMiddleware,
