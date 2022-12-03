@@ -55,7 +55,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const dispatch = (type: string, payload?: any) => {
     defaultDispatch({ type, payload });
   };
-  console.log('state', state);
 
   useEffect(() => {
     async function loadUser() {
