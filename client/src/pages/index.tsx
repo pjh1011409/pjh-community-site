@@ -13,7 +13,7 @@ const Home: NextPage = () => {
   const fetcher = async (url: string) => {
     return await axios.get(url).then(res => res.data);
   };
-  const address = 'http://localhost:4000/api/subs/sub/topSubs';
+  const address = `/subs/sub/topSubs`;
   const { data: topSubs } = useSWR<Sub[]>(address, fetcher);
 
   return (
@@ -36,20 +36,19 @@ const Home: NextPage = () => {
                 className="flex items-center px-4 py-2 text-xs border-b"
               >
                 <Link href={`/r/${sub.name}`}>
-                  <a>
-                    <Image
-                      src={sub.imageUrl}
-                      className="rounded-full cursor-pointer"
-                      alt="Sub"
-                      width={24}
-                      height={24}
-                    />
-                  </a>
+                  <Image
+                    src={sub.imageUrl}
+                    className="rounded-full cursor-pointer"
+                    alt="Sub"
+                    width={24}
+                    height={24}
+                  />
                 </Link>
-                <Link href={`/r/${sub.name}`}>
-                  <a className="ml-2 font-bold hover:cursor-pointer">
-                    /r/{sub.name}
-                  </a>
+                <Link
+                  href={`/r/${sub.name}`}
+                  className="ml-2 font-bold hover:cursor-pointer"
+                >
+                  /r/{sub.name}
                 </Link>
                 <p className="ml-auto font-md">{sub.postCount}</p>
               </div>
