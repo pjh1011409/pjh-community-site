@@ -22,14 +22,7 @@ export const NavBar: React.FC = () => {
   return (
     <div className="fixed inset-x-0 top-0 z-10 flex items-center justify-between px-5 bg-white h-13">
       <span className="text-2xl font-semibold text-gray-400">
-        <Link href="/">
-          <Image
-            src="/reddit-name-logo.png"
-            alt="logo"
-            width={80}
-            height={45}
-          ></Image>
-        </Link>
+        <Link href="/">Community</Link>
       </span>
       <div className="max-w-full px-4">
         <div className="relative flex items-center bg-gray-100 border rounded hover:border-gray-700 hover:bg-white">
