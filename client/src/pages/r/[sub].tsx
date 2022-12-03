@@ -6,28 +6,26 @@ import { useRouter } from 'next/router';
 import SideBar from '../../components/sideBar';
 import useSWR from 'swr';
 import { useAuthState } from '../../context/auth';
+import PostCard from '../../components/postCard';
+import { Post } from '../../types';
 
 const SubPage = () => {
   const [ownSub, setOwnSub] = useState(false);
   const { authenticated, user } = useAuthState();
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
-  const fetcher = async (url: string) => {
-    try {
-      const res = await Axios.get(url);
-      return res.data;
-    } catch (error: any) {
-      throw error.response.data;
-    }
-  };
-
   const router = useRouter();
   const subName = router.query.sub;
-  const { data: sub, error } = useSWR(
-    subName ? `subs/${subName}` : null,
-    fetcher
-  );
+  const {
+    data: sub,
+    error,
+    mutate,
+  } = useSWR(subName ? `/subs/${subName}` : null);
 
+  useEffect(() => {
+    if (!sub || !user) return;
+    setOwnSub(authenticated && user.username === sub.username);
+  }, [sub]);
   const openFileInput = (type: string) => {
     if (!ownSub) return;
     const fileInput = fileInputRef.current;
@@ -49,15 +47,25 @@ const SubPage = () => {
       await Axios.post(`/subs/${sub.name}/upload`, formData, {
         headers: { 'context-Type': 'multipart/form-data' },
       });
+      mutate();
     } catch (error: any) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    if (!sub || !user) return;
-    setOwnSub(authenticated && user.username === sub.username);
-  }, [sub]);
+  let renderPosts;
+  if (!sub) {
+    renderPosts = <p className="text-lg text-center">로딩중...</p>;
+  } else if (sub.posts.length === 0) {
+    renderPosts = (
+      <p className="text-lg text-center">아직 작성된 포스트가 없습니다.</p>
+    );
+  } else {
+    renderPosts = sub.posts.map((post: Post) => (
+      <PostCard key={post.identifier} post={post} subMutate={mutate} />
+    ));
+  }
+
   return (
     <>
       {sub && (
@@ -117,7 +125,7 @@ const SubPage = () => {
           </div>
           {/* 포스트와 사이드바 */}
           <div className="flex max-w-5xl px-4 pt-5 mx-auto">
-            <div className="w-full md:mr-3 md:w-8/12"></div>
+            <div className="w-full md:mr-3 md:w-8/12">{renderPosts}</div>
             <SideBar sub={sub} />
           </div>
         </>
