@@ -109,7 +109,9 @@ const PostPage = () => {
                         /u/{post.username}
                       </Link>
                       <Link href={post.url} className="mx-1 hover:underline">
-                        {dayjs(post.createdAt).format('YYYY-MM-DD HH:mm')}
+                        {dayjs(post.createdAt)
+                          .add(9, 'hour')
+                          .format('YYYY-MM-DD HH:mm')}
                       </Link>
                     </p>
                   </div>
