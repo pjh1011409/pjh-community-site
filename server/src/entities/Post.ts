@@ -1,5 +1,4 @@
 import { Exclude, Expose } from 'class-transformer';
-import { ValidationTypes } from 'class-validator';
 import {
   BeforeInsert,
   Column,
@@ -14,7 +13,8 @@ import User from './User';
 import BaseEntity from './Entity';
 import Vote from './Vote';
 import Comment from './Comment';
-import { makeId, slugify } from '../utils/helpers';
+import { makeId } from '../utils/helpers';
+import { slugify } from 'transliteration';
 
 @Entity('posts')
 export default class Post extends BaseEntity {
