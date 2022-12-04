@@ -1,12 +1,13 @@
-import Head from 'next/head';
 import Image from 'next/image';
-import styles from '../styles/Home.module.css';
 import Link from 'next/link';
 import type { NextPage } from 'next';
 import axios from 'axios';
-import { Sub } from '../types';
+import { Sub, Post } from '../types';
 import useSWR from 'swr';
 import { useAuthState } from '../context/auth';
+import useSWRInfinite from 'swr/infinite';
+import PostCard from '../components/postCard';
+import { useEffect, useState } from 'react';
 
 const Home: NextPage = () => {
   const { authenticated } = useAuthState();
@@ -14,12 +15,68 @@ const Home: NextPage = () => {
     return await axios.get(url).then(res => res.data);
   };
   const address = `/subs/sub/topSubs`;
+
   const { data: topSubs } = useSWR<Sub[]>(address, fetcher);
+
+  const getKey = (pageIndex: number, previousPageData: Post[]) => {
+    if (previousPageData && !previousPageData.length) return null;
+    return `/posts?page=${pageIndex}`;
+  };
+
+  const {
+    data,
+    error,
+    size: page,
+    setSize: setPage,
+    isValidating,
+    mutate,
+  } = useSWRInfinite<Post[]>(getKey);
+
+  const isInitialLoading = !data && !error;
+  const posts: Post[] = data ? ([] as Post[]).concat(...data) : [];
+
+  const [observedPost, setObserverPost] = useState('');
+
+  useEffect(() => {
+    if (!posts || posts.length === 0) return;
+
+    const id = posts[posts.length - 1].identifier;
+
+    if (id !== observedPost) {
+      setObserverPost(id);
+      observeElement(document.getElementById(id));
+    }
+  }, [posts]);
+
+  const observeElement = (element: HTMLElement | null) => {
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0].isIntersecting === true) {
+          console.log('Reached bottom of post');
+          setPage(page + 1);
+          observer.unobserve(element);
+        }
+      },
+      { threshold: 1 }
+    );
+
+    observer.observe(element);
+  };
 
   return (
     <div className="flex max-w-5xl px-4 pt-5 mx-auto">
       {/* 포스트 리스트 */}
-      <div className="w-full md:mr-3 md:w-8/12"></div>
+      <div className="w-full md:mr-3 md:w-8/12">
+        {isInitialLoading && <p className="text-lg text-center">Loading...</p>}
+        {posts?.map(post => (
+          <PostCard post={post} key={post.identifier} mutate={mutate} />
+        ))}
+        {isValidating && posts.length > 0 && (
+          <p className="text-lg text-center">Loading More...</p>
+        )}
+      </div>
 
       {/* 사이드바 */}
       <div className="hidden w-4/12 ml-3 md:block">
