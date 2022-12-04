@@ -109,7 +109,7 @@ const PostCard = ({
               /u/{username}
             </Link>
             <Link href={url} className="mx-1 hover:underline">
-              {dayjs(createdAt).format('YYYY-MM-DD HH:mm')}
+              {dayjs(createdAt).add(9, 'hour').format('YYYY-MM-DD HH:mm')}
             </Link>
           </p>
         </div>
