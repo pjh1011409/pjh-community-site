@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import { useAuthState } from '../../../../context/auth';
 import { FormEvent, useState } from 'react';
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
+import { off } from 'process';
 
 const PostPage = () => {
   const router = useRouter();
@@ -63,7 +64,15 @@ const PostPage = () => {
       console.log(error);
     }
   };
-  console.log('post.userVote', post?.userVote);
+
+  const deleteComment = async (identifier: string | undefined) => {
+    try {
+      await Axios.delete(`/posts/${identifier}/${slug}/comments`);
+      commentMutate();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="flex max-w-5xl px-4 pt-5 mx-auto">
@@ -174,7 +183,7 @@ const PostPage = () => {
                 )}
               </div>
               {/* 댓글 리스트 부분 */}
-              {comments?.map(comment => (
+              {comments?.map((comment, id) => (
                 <div className="flex" key={comment.identifier}>
                   {/* 좋아요 싫어요 기능 부분 */}
                   <div className="flex-shrink-0 w-10 py-2 text-center rounded-l">
@@ -222,6 +231,15 @@ const PostPage = () => {
                       </span>
                     </p>
                     <p>{comment.body}</p>
+                    {authenticated && user?.username === comment.username ? (
+                      <button
+                        onClick={() => {
+                          deleteComment(comment.identifier);
+                        }}
+                      >
+                        삭제
+                      </button>
+                    ) : null}
                   </div>
                 </div>
               ))}
