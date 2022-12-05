@@ -106,10 +106,32 @@ const getPostComments = async (req: Request, res: Response) => {
     if (res.locals.user) {
       comments.forEach(c => c.setUserVote(res.locals.user));
     }
+
     return res.json(comments);
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: '문제가 발생했습니다.' });
+  }
+};
+
+const deletePostComments = async (req: Request, res: Response) => {
+  const { identifier } = req.params;
+  try {
+    const post = await Comment.findOneByOrFail({ identifier });
+    const comments = await Comment.createQueryBuilder()
+      .delete()
+      .from(Comment)
+      .where({ identifier: post.identifier })
+      .execute();
+
+    if (!comments) return;
+
+    return res.json(comments);
+  } catch (error) {
+    console.log('x');
+
+    console.log(error);
+    return res.status(404).json({ error: '문제가 발생하였습니다.' });
   }
 };
 
@@ -119,5 +141,10 @@ router.get('/', userMiddleware, getPosts);
 router.get('/:identifier/:slug', userMiddleware, getPost);
 router.post('/:identifier/:slug/comments', userMiddleware, createPostComment);
 router.get('/:identifier/:slug/comments', userMiddleware, getPostComments);
+router.delete(
+  '/:identifier/:slug/comments',
+  userMiddleware,
+  deletePostComments
+);
 
 export default router;
