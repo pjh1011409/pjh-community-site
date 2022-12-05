@@ -20,12 +20,16 @@ export default class Vote extends BaseEntity {
   @Column({ nullable: true })
   postId: number;
 
-  @ManyToOne(() => Post)
+  @ManyToOne(() => Post, {
+    onDelete: 'CASCADE',
+  })
   post: Post;
 
   @Column({ nullable: true })
   commentId: number;
 
-  @ManyToOne(() => Comment)
+  @ManyToOne(() => Comment, {
+    onDelete: 'CASCADE',
+  })
   comment: Comment;
 }

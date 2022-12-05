@@ -33,7 +33,10 @@ export default class Comment extends BaseEntity {
   @Column()
   postId: number;
 
-  @ManyToOne(() => Post, post => post.comments, { nullable: false })
+  @ManyToOne(() => Post, post => post.comments, {
+    nullable: false,
+    onDelete: 'CASCADE',
+  })
   post: Post;
 
   @Exclude()
