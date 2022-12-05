@@ -3,12 +3,27 @@ import React from 'react';
 import { useAuthState } from '../context/auth';
 import { Sub } from '../types';
 import dayjs from 'dayjs';
+import Axios from 'axios';
+import { useRouter } from 'next/router';
 type Props = {
   sub: Sub;
+  mutate: () => void;
 };
 
-const SideBar = ({ sub }: Props) => {
-  const { authenticated } = useAuthState();
+const SideBar = ({ sub, mutate }: Props) => {
+  const { authenticated, user } = useAuthState();
+  const router = useRouter();
+
+  const deleteSub = async (name: string | undefined) => {
+    try {
+      await Axios.delete(`/subs/${name}`);
+      mutate();
+      router.push('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="hidden w-4/12 ml-3 md:block">
       <div className="bg-white border rounded">
@@ -33,6 +48,15 @@ const SideBar = ({ sub }: Props) => {
               >
                 포스트 생성
               </Link>
+              {authenticated && user?.username === sub.username ? (
+                <button
+                  onClick={() => {
+                    deleteSub(sub.name);
+                  }}
+                >
+                  삭제
+                </button>
+              ) : null}
             </div>
           )}
         </div>
