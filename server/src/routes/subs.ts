@@ -30,6 +30,7 @@ const createSub = async (req: Request, res: Response, next) => {
       throw errors;
     }
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ error: '문제가 발생했습니다.' });
   }
 
@@ -116,6 +117,25 @@ const ownSub = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+const deleteSub = async (req: Request, res: Response) => {
+  const { name } = req.params;
+  try {
+    const community = await Sub.findOneByOrFail({ name });
+    const sub = await Sub.createQueryBuilder()
+      .delete()
+      .from(Sub)
+      .where({ name: community.name })
+      .execute();
+
+    if (!sub) return;
+
+    return res.json(sub);
+  } catch (error) {
+    console.log(error);
+    return res.status(404).json({ error: '문제가 발생하였습니다.' });
+  }
+};
+
 const upload = multer({
   storage: multer.diskStorage({
     destination: 'public/images',
@@ -177,6 +197,7 @@ const uploadSubImage = async (req: Request, res: Response) => {
 const router = Router();
 
 router.get('/:name', userMiddleware, getSub);
+router.delete('/:name', userMiddleware, deleteSub);
 router.post('/', userMiddleware, authMiddleware, createSub);
 router.get('/sub/topSubs', topSubs);
 router.post(
