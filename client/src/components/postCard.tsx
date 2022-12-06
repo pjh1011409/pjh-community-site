@@ -7,6 +7,7 @@ import React from 'react';
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
 import { useAuthState } from '../context/auth';
 import { Post } from '../types';
+import Axios from 'axios';
 
 interface PostCardProps {
   post: Post;
@@ -35,7 +36,7 @@ const PostCard = ({
   const router = useRouter();
   const isInSubPage = router.pathname === '/r/[sub]';
 
-  const { authenticated } = useAuthState();
+  const { authenticated, user } = useAuthState();
 
   const vote = async (value: number) => {
     if (!authenticated) router.push('/login');
@@ -44,6 +45,16 @@ const PostCard = ({
 
     try {
       await axios.post('/votes', { identifier, slug, value });
+      if (mutate) mutate();
+      if (subMutate) subMutate();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deletePost = async (identifier: string | undefined) => {
+    try {
+      await Axios.delete(`/posts/${identifier}/${slug}`);
       if (mutate) mutate();
       if (subMutate) subMutate();
     } catch (error) {
@@ -112,6 +123,15 @@ const PostCard = ({
               {dayjs(createdAt).add(9, 'hour').format('YYYY-MM-DD HH:mm')}
             </Link>
           </p>
+          {authenticated && user?.username === username ? (
+            <button
+              onClick={() => {
+                deletePost(identifier);
+              }}
+            >
+              삭제
+            </button>
+          ) : null}
         </div>
 
         <Link href={url} className="my-1 text-lg font-medium">
