@@ -26,7 +26,9 @@ export default class Comment extends BaseEntity {
   @Column()
   username: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'username', referencedColumnName: 'username' })
   user: User;
 

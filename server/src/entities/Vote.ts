@@ -10,7 +10,9 @@ export default class Vote extends BaseEntity {
   @Column()
   value: number;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'username', referencedColumnName: 'username' })
   user: User;
 

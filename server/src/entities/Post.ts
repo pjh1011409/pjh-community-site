@@ -38,7 +38,9 @@ export default class Post extends BaseEntity {
   @Column()
   username: string;
 
-  @ManyToOne(() => User, user => user.posts)
+  @ManyToOne(() => User, user => user.posts, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'username', referencedColumnName: 'username' })
   user: User;
 
