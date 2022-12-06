@@ -7,7 +7,7 @@ import Axios from 'axios';
 import { useRouter } from 'next/router';
 type Props = {
   sub: Sub;
-  mutate: () => void;
+  mutate?: () => void;
 };
 
 const SideBar = ({ sub, mutate }: Props) => {
@@ -17,7 +17,7 @@ const SideBar = ({ sub, mutate }: Props) => {
   const deleteSub = async (name: string | undefined) => {
     try {
       await Axios.delete(`/subs/${name}`);
-      mutate();
+      if (mutate) mutate();
       router.push('/');
     } catch (error) {
       console.log(error);
