@@ -72,6 +72,25 @@ const getPosts = async (req: Request, res: Response) => {
   }
 };
 
+const deletePost = async (req: Request, res: Response) => {
+  const { identifier, slug } = req.params;
+  try {
+    const post = await Post.findOneByOrFail({ identifier, slug });
+    const postDelete = await Post.createQueryBuilder()
+      .delete()
+      .from(Post)
+      .where({ identifier: post.identifier })
+      .execute();
+
+    if (!postDelete) return;
+
+    return res.json(postDelete);
+  } catch (error) {
+    console.log(error);
+    return res.status(404).json({ error: '문제가 발생하였습니다.' });
+  }
+};
+
 const createPostComment = async (req: Request, res: Response) => {
   const { identifier, slug } = req.params;
   const body = req.body.body;
@@ -114,7 +133,7 @@ const getPostComments = async (req: Request, res: Response) => {
   }
 };
 
-const deletePostComments = async (req: Request, res: Response) => {
+const deletePostComment = async (req: Request, res: Response) => {
   const { identifier } = req.params;
   try {
     const post = await Comment.findOneByOrFail({ identifier });
@@ -139,12 +158,10 @@ const router = Router();
 router.post('/', userMiddleware, authMiddleware, createPost);
 router.get('/', userMiddleware, getPosts);
 router.get('/:identifier/:slug', userMiddleware, getPost);
+router.delete('/:identifier/:slug', userMiddleware, deletePost);
+
 router.post('/:identifier/:slug/comments', userMiddleware, createPostComment);
 router.get('/:identifier/:slug/comments', userMiddleware, getPostComments);
-router.delete(
-  '/:identifier/:slug/comments',
-  userMiddleware,
-  deletePostComments
-);
+router.delete('/:identifier/:slug/comments', userMiddleware, deletePostComment);
 
 export default router;
