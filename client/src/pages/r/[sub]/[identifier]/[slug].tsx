@@ -146,6 +146,16 @@ const PostPage = () => {
                   </div>
                   <h1 className="my-1 text-xl font-medium">{post.title}</h1>
                   <p className="my-3 text-sm">{post.body}</p>
+                  {/* {post && (
+                    <Image
+                      src={post.imageUrl}
+                      alt="커뮤니티 이미지"
+                      width={70}
+                      height={70}
+                      className="rounded-full"
+                      onClick={() => openFileInput('image')}
+                    />
+                  )} */}
                   <div className="flex">
                     <button>
                       <i className="mr-1 fas fa-comment-alt fa-xs"></i>

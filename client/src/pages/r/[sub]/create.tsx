@@ -1,12 +1,14 @@
-import axios from 'axios';
+import Axios from 'axios';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useState, useEffect } from 'react';
 import { Post } from '../../../types';
 
 const PostCreate = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+
   const router = useRouter();
   const { sub: subName } = router.query;
   const submitPost = async (e: FormEvent) => {
@@ -14,7 +16,7 @@ const PostCreate = () => {
     if (title.trim() === '' || !subName) return;
 
     try {
-      const { data: post } = await axios.post<Post>('/posts', {
+      const { data: post } = await Axios.post<Post>('/posts', {
         title: title.trim(),
         body,
         sub: subName,
@@ -25,6 +27,36 @@ const PostCreate = () => {
       console.log(error);
     }
   };
+
+  // useEffect(() => {
+  //   if (!post || !user) return;
+  //   setOwnSub(authenticated && user.username === sub.username);
+  // }, [sub]);
+  // const openFileInput = (type: string) => {
+  //   if (!ownSub) return;
+  //   const fileInput = fileInputRef.current;
+  //   if (fileInput) {
+  //     fileInput.name = type;
+  //     fileInput.click();
+  //   }
+  // };
+
+  // const uploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (e.target.files === null) return;
+  //   const file = e.target.files[0];
+
+  //   const formData = new FormData();
+  //   formData.append('file', file);
+  //   formData.append('type', fileInputRef.current!.name);
+
+  //   try {
+  //     await Axios.post(`/posts/${title}/upload`, formData, {
+  //       headers: { 'context-Type': 'multipart/form-data' },
+  //     });
+  //   } catch (error: any) {
+  //     console.log(error);
+  //   }
+  // };
   return (
     <div className="flex flex-col justify-center pt-16">
       <div className="w-10/12 mx-auto md:w-96">
@@ -54,6 +86,7 @@ const PostCreate = () => {
               value={body}
               onChange={e => setBody(e.target.value)}
             />
+            <input type="file" ref={fileInputRef} />
             <div className="flex justify-end">
               <button className="px-4 py-1 text-sm font-semibold text-white bg-gray-400 border rounded">
                 생성하기
@@ -73,7 +106,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     const cookie = req.headers.cookie;
     if (!cookie) throw new Error('쿠키가 없습니다.');
 
-    await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/auth/me`, {
+    await Axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/auth/me`, {
       headers: { cookie },
     });
     return { props: {} };
