@@ -1,9 +1,13 @@
 import userMiddleware from '../middlewares/user';
 import authMiddleware from '../middlewares/auth';
+import multer, { FileFilterCallback } from 'multer';
 import { Request, Response, Router } from 'express';
 import Sub from '../entities/Sub';
 import Post from '../entities/Post';
 import Comment from '../entities/Comment';
+import { makeId } from '../utils/helpers';
+import { unlinkSync } from 'fs';
+import path from 'path';
 
 const createPost = async (req: Request, res: Response) => {
   const { title, body, sub } = req.body;
@@ -88,6 +92,66 @@ const deletePost = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
     return res.status(404).json({ error: '문제가 발생하였습니다.' });
+  }
+};
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: 'public/images',
+    filename: (_, file, callback) => {
+      const name = makeId(10);
+      callback(null, name + path.extname(file.originalname));
+    },
+  }),
+
+  fileFilter: (_, file: any, callback: FileFilterCallback) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+      callback(null, true);
+    } else {
+      callback(new Error('이미지가 아닙니다.'));
+    }
+  },
+});
+
+const uploadPostImage = async (req: Request, res: Response) => {
+  const post: Post = res.locals.post;
+
+  console.log('post', res.locals.post);
+  try {
+    const type = req.body.type;
+
+    if (type !== 'image') {
+      if (!req.file?.path) {
+        return res.status(400).json({ error: '유효하지 않는 파일입니다.' });
+      }
+
+      unlinkSync(req.file.path);
+      return res.status(400).json({ error: '잘못된 유형입니다.' });
+    }
+
+    let oldImageUrn = '';
+
+    if (type === 'image') {
+      oldImageUrn = post.imageUrn || '';
+      post.imageUrn = req.file?.filename || '';
+    }
+    await post.save();
+
+    if (oldImageUrn !== '') {
+      const fullFilename = path.resolve(
+        process.cwd(),
+        'public',
+        'images',
+        oldImageUrn
+      );
+      unlinkSync(fullFilename);
+    }
+
+    console.log('post', post);
+    return res.json(post);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: '문제가 발생하였습니다' });
   }
 };
 
@@ -178,6 +242,14 @@ router.post('/', userMiddleware, authMiddleware, createPost);
 router.get('/', userMiddleware, getPosts);
 router.get('/:identifier/:slug', userMiddleware, getPost);
 router.delete('/:identifier/:slug', userMiddleware, deletePost);
+
+router.post(
+  '/:title/upload',
+  userMiddleware,
+  authMiddleware,
+  upload.single('file'),
+  uploadPostImage
+);
 
 router.post('/:identifier/:slug/comments', userMiddleware, createPostComment);
 router.get('/:identifier/:slug/comments', userMiddleware, getPostComments);
