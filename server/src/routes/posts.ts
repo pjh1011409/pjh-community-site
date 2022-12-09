@@ -147,8 +147,27 @@ const deletePostComment = async (req: Request, res: Response) => {
 
     return res.json(comments);
   } catch (error) {
-    console.log('x');
+    console.log(error);
+    return res.status(404).json({ error: '문제가 발생하였습니다.' });
+  }
+};
 
+const updatePostComment = async (req: Request, res: Response) => {
+  const { identifier } = req.params;
+  const body = req.body.body;
+
+  try {
+    const post = await Comment.findOneByOrFail({ identifier });
+    const comments = await Comment.createQueryBuilder()
+      .update()
+      .set({ body: body })
+      .where({ identifier: post.identifier })
+      .execute();
+
+    if (!comments) return;
+
+    return res.json(comments);
+  } catch (error) {
     console.log(error);
     return res.status(404).json({ error: '문제가 발생하였습니다.' });
   }
@@ -162,6 +181,7 @@ router.delete('/:identifier/:slug', userMiddleware, deletePost);
 
 router.post('/:identifier/:slug/comments', userMiddleware, createPostComment);
 router.get('/:identifier/:slug/comments', userMiddleware, getPostComments);
+router.put('/:identifier/:slug/comments', userMiddleware, updatePostComment);
 router.delete('/:identifier/:slug/comments', userMiddleware, deletePostComment);
 
 export default router;
