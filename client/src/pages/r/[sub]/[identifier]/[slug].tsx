@@ -7,13 +7,15 @@ import dayjs from 'dayjs';
 import { useAuthState } from '../../../../context/auth';
 import { FormEvent, useState } from 'react';
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
-import { off } from 'process';
 
 const PostPage = () => {
   const router = useRouter();
   const { identifier, sub, slug } = router.query;
   const { authenticated, user } = useAuthState();
   const [newComment, setNewComment] = useState('');
+  const [updateId, setUpdateId] = useState('');
+  const [update, setUpdate] = useState('');
+
   const {
     data: post,
     error,
@@ -69,6 +71,24 @@ const PostPage = () => {
     try {
       await Axios.delete(`/posts/${identifier}/${slug}/comments`);
       commentMutate();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateComment = async (e: FormEvent) => {
+    e.preventDefault();
+    if (update.trim() === '') {
+      return;
+    }
+
+    try {
+      await Axios.put(`/posts/${updateId}/${slug}/comments`, {
+        body: update,
+      });
+      commentMutate();
+      setUpdate('');
+      setUpdateId('');
     } catch (error) {
       console.log(error);
     }
@@ -183,7 +203,7 @@ const PostPage = () => {
                 )}
               </div>
               {/* 댓글 리스트 부분 */}
-              {comments?.map((comment, id) => (
+              {comments?.map(comment => (
                 <div className="flex" key={comment.identifier}>
                   {/* 좋아요 싫어요 기능 부분 */}
                   <div className="flex-shrink-0 w-10 py-2 text-center rounded-l">
@@ -230,15 +250,49 @@ const PostPage = () => {
                                             `}
                       </span>
                     </p>
-                    <p>{comment.body}</p>
-                    {authenticated && user?.username === comment.username ? (
-                      <button
-                        onClick={() => {
-                          deleteComment(comment.identifier);
-                        }}
-                      >
-                        삭제
-                      </button>
+                    {updateId === comment.identifier ? (
+                      <>
+                        {' '}
+                        <form onSubmit={updateComment}>
+                          <textarea
+                            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-gray-600"
+                            onChange={e => setUpdate(e.target.value)}
+                            value={update}
+                          ></textarea>
+                          <div className="flex justify-end">
+                            <button
+                              className="px-3 py-1 text-white bg-gray-400 rounded"
+                              disabled={update.trim() === ''}
+                            >
+                              수정
+                            </button>
+                          </div>
+                        </form>
+                      </>
+                    ) : (
+                      <p>{comment.body}</p>
+                    )}
+
+                    {authenticated &&
+                    user?.username === comment.username &&
+                    !updateId ? (
+                      <>
+                        <button
+                          onClick={() => {
+                            deleteComment(comment.identifier);
+                          }}
+                        >
+                          삭제
+                        </button>
+                        <button
+                          onClick={() => {
+                            setUpdateId(comment.identifier);
+                            setUpdate(comment.body);
+                          }}
+                        >
+                          수정
+                        </button>
+                      </>
                     ) : null}
                   </div>
                 </div>
