@@ -32,6 +32,9 @@ export default class Post extends BaseEntity {
   @Column({ nullable: true, type: 'text' })
   body: string;
 
+  @Column({ nullable: true })
+  imageUrn: string;
+
   @Column()
   subName: string;
 
@@ -57,6 +60,13 @@ export default class Post extends BaseEntity {
   @Exclude()
   @OneToMany(() => Vote, vote => vote.post)
   votes: Vote[];
+
+  @Expose()
+  get imageUrl(): string {
+    return this.imageUrn
+      ? `${process.env.APP_URL}/images/${this.imageUrn}`
+      : 'https://www.gravatar.com/avatar?d=mp&f=y';
+  }
 
   @Expose() get url(): string {
     return `/r/${this.subName}/${this.identifier}/${this.slug}`;
