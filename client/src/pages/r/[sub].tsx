@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Axios from 'axios';
 import { useRouter } from 'next/router';
-import SideBar from '../../components/sideBar';
+import SideBar from '../../components/SideBar';
 import useSWR from 'swr';
 import { useAuthState } from '../../context/auth';
-import PostCard from '../../components/postCard';
+import PostCard from '../../components/PostCard';
 import { Post } from '../../types';
 
 const SubPage = () => {
