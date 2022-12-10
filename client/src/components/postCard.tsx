@@ -4,7 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
+import { BsHandThumbsUpFill, BsTrashFill } from 'react-icons/bs';
+import { FaCommentAlt } from 'react-icons/fa';
 import { useAuthState } from '../context/auth';
 import { Post } from '../types';
 import Axios from 'axios';
@@ -63,36 +64,29 @@ const PostCard = ({
   };
 
   return (
-    <div className="flex mb-4 bg-white rounded" id={identifier}>
+    <div
+      className="flex mb-4 bg-[#ebf3f9] rounded border-4 border-[#91bfe2] drop-shadow-2xl h-auto"
+      id={identifier}
+    >
       {/* 좋아요 싫어요 기능 부분 */}
       <div className="flex-shrink-0 w-10 py-2 text-center rounded-l">
         {/* 좋아요 */}
         <div
-          className="flex justify-center w-6 mx-auto text-gray-400 rounded cursor-pointer hover:bg-gray-300 hover:text-red-500"
+          className="flex justify-center w-6 mx-auto text-gray-400 rounded cursor-pointer hover:bg-gray-300 hover:text-orange-500 mt-2"
           onClick={() => vote(1)}
         >
           {userVote === 1 ? (
-            <FaArrowUp className="text-red-500" />
+            <BsHandThumbsUpFill className="text-orange-400 text-xl" />
           ) : (
-            <FaArrowUp />
+            <BsHandThumbsUpFill className="text-xl" />
           )}
         </div>
         <p className="text-xs font-bold">{voteScore}</p>
         {/* 싫어요 */}
-        <div
-          className="flex justify-center w-6 mx-auto text-gray-400 rounded cursor-pointer hover:bg-gray-300 hover:text-blue-500"
-          onClick={() => vote(-1)}
-        >
-          {userVote === -1 ? (
-            <FaArrowDown className="text-blue-500" />
-          ) : (
-            <FaArrowDown />
-          )}
-        </div>
       </div>
       {/* 포스트 데이터 부분 */}
-      <div className="w-full p-2">
-        <div className="flex items-center">
+      <div className="w-full p-2 ">
+        <div className="flex items-center my-2">
           {!isInSubPage && (
             <div className="flex items-center">
               <Link href={`/r/${subName}`}>
@@ -100,48 +94,57 @@ const PostCard = ({
                   src={sub!.imageUrl}
                   alt="sub"
                   className="rounded-full cursor-pointer"
-                  width={12}
-                  height={12}
+                  width={25}
+                  height={25}
                 />
               </Link>
               <Link
                 href={`/r/${subName}`}
-                className="ml-2 text-xs font-bold cursor-pointer hover:underline"
+                className="ml-2 mx-1 text-sm font-bold cursor-pointer  text-gray-500 underline hover:text-gray-900"
               >
-                /r/{subName}
+                {subName}
               </Link>
-              <span className="mx-1 text-xs text-gray-400">•</span>
+              <span className="mx-1 text-sm text-gray-400">•</span>
             </div>
           )}
 
-          <p className="text-xs text-gray-400">
+          <p className="text-sm text-gray-500">
             Posted by
-            <Link href={`/u/${username}`} className="mx-1 hover:underline">
-              /u/{username}
+            <Link
+              href={`/u/${username}`}
+              className="mx-1  cursor-pointer underline  hover:text-gray-900"
+            >
+              {username} 님
             </Link>
-            <Link href={url} className="mx-1 hover:underline">
+            <span className="mx-1 text-sm text-gray-400">•</span>
+            <Link href={url} className="mx-1 underline  hover:text-gray-900">
               {dayjs(createdAt).add(9, 'hour').format('YYYY-MM-DD HH:mm')}
             </Link>
           </p>
-          {authenticated && user?.username === username ? (
-            <button
-              onClick={() => {
-                deletePost(identifier);
-              }}
-            >
-              삭제
-            </button>
-          ) : null}
+          <div className="flex ml-auto">
+            {authenticated && user?.username === username ? (
+              <button
+                onClick={() => {
+                  deletePost(identifier);
+                }}
+                className="mx-2"
+              >
+                <BsTrashFill className="text-lg hover:text-gray-900 text-gray-500 mt-1 " />
+              </button>
+            ) : null}
+          </div>
         </div>
 
-        <Link href={url} className="my-1 text-lg font-medium">
+        <Link href={url} className=" text-3xl font-extrabold text-[#14468c]">
           {title}
         </Link>
-        {body && <p className="my-1 text-sm">{body}</p>}
-        <div className="flex">
-          <Link href={url}>
-            <i className="mr-1 fas fa-comment-alt fa-xs"></i>
-            <span>{commentCount}</span>
+        {body && <p className="my-2 text-lg">{body}</p>}
+        <div>
+          <Link href={url} className="flex items-center">
+            <FaCommentAlt />{' '}
+            <span className="mx-2 font-bold text-lg">
+              Comment: {commentCount}
+            </span>
           </Link>
         </div>
       </div>

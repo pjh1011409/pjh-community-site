@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app';
 import Axios from 'axios';
 import { AuthProvider } from '../context/auth';
 import { useRouter } from 'next/router';
-import NavBar from '../components/navBar';
+import NavBar from '../components/NavBar';
 import axios from 'axios';
 import { SWRConfig } from 'swr';
 import Head from 'next/head';
@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <SWRConfig value={{ fetcher }}>
         <AuthProvider>
           {!authRoute && <NavBar />}
-          <div className={authRoute ? '' : 'pt-12 bg-gray-200 min-h-screen'}>
+          <div className={authRoute ? '' : 'pt-16 bg-pet-pattern min-h-screen'}>
             <Component {...pageProps} />
           </div>
         </AuthProvider>

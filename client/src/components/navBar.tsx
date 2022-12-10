@@ -1,11 +1,10 @@
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaSearch } from 'react-icons/fa';
 import { useAuthDispatch, useAuthState } from '../context/auth';
 
 export const NavBar: React.FC = () => {
-  const { loading, authenticated } = useAuthState();
+  const { loading, authenticated, user } = useAuthState();
   const dispatch = useAuthDispatch();
 
   const handleLogout = () => {
@@ -20,41 +19,45 @@ export const NavBar: React.FC = () => {
       });
   };
   return (
-    <div className="fixed inset-x-0 top-0 z-10 flex items-center justify-between px-5 bg-white h-13">
-      <span className="text-2xl font-semibold text-gray-400">
-        <Link href="/">community</Link>
+    <div className="fixed inset-x-0 top-0 z-10 flex items-center justify-between px-5 bg-[#f6d9a3] h-13 py-2 rounded-b-lg border-b-4 border-[#e18a19]">
+      <span className=" font-semibold  py-1 w-2/3 mx-auto">
+        <Link href="/" className="flex items-end text-[#82384a] ">
+          <Image src="/images/POP.png" alt="POP아이콘" width={45} height={45} />
+          <p className="text-5xl ml-2 font-extrabold text-shadow-md">POP</p>
+          <p className="text-xs font-semibold ">Proud Of Pets</p>
+        </Link>
       </span>
-      <div className="max-w-full px-4">
-        <div className="relative flex items-center bg-gray-100 border rounded hover:border-gray-700 hover:bg-white">
-          <FaSearch className="ml-2 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Search..."
-            className="px-3 py-1 bg-transparent rounded h-7 focus:outline-none"
-          />
-        </div>
-      </div>
 
       <div className="flex">
         {!loading &&
           (authenticated ? (
-            <button
-              className="w-20 px-2 mr-2 text-sm text-center text-white bg-gray-400 rounded h-7"
-              onClick={handleLogout}
-            >
-              로그아웃
-            </button>
+            <div className="flex flex-wrap  md:w-44 justify-end max: w-24 text-[#d07e12] font-semibold text-md">
+              <div className=" md:w-30 my-2">
+                <Link
+                  href={`/u/${user?.username}`}
+                  className="mx-1 hover:underline w-24 px-2 mr-2 text-md text-center underline"
+                >
+                  {user?.username} 님
+                </Link>
+              </div>
+              <button
+                className="w-18 px-2 mr-2 text-md text-center "
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            </div>
           ) : (
             <>
               <Link
                 href="/login"
-                className="w-20 px-2 pt-1 mr-2 text-sm text-center text-blue-500 border border-blue-500 rounded h-7"
+                className="flex  text-[#d07e12] mx-1 font-extrabold text-lg"
               >
                 로그인
               </Link>
               <Link
                 href="/register"
-                className="w-20 px-2 pt-1 text-sm text-center text-white bg-gray-400 rounded h-7"
+                className="flex  text-[#d07e12] mx-1 font-extrabold text-lg"
               >
                 회원가입
               </Link>
