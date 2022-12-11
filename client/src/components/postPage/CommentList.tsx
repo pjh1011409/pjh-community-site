@@ -81,16 +81,13 @@ const CommentList = ({ comments, commentMutate, vote }: CommentListProps) => {
                 >
                   {comment.username}
                 </Link>
-                <span className="mx-1 text-sm text-gray-400">•</span>
-                <span className="text-gray-600">
-                  {`${comment.voteScore} posts`}
-                </span>
+
                 <span className="mx-1 text-sm text-gray-400">•</span>
 
                 <span className="text-gray-600">
                   {`${dayjs(comment.createdAt).format('YYYY-MM-DD HH:mm')}`}
                 </span>
-
+                <span className="mx-1 text-sm text-gray-400">•</span>
                 {authenticated &&
                 user?.username === comment.username &&
                 !updateId ? (
