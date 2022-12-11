@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
-import Introduce from '../components/Introduce';
-import SubBar from '../components/SubBar';
-import Search from '../components/Search';
-import PostList from '../components/PostList';
+import Introduce from '../components/mainPage/Introduce';
+import SubBar from '../components/mainPage/SubBar';
+import Search from '../components/common/Search';
+import PostList from '../components/mainPage/PostList';
 
 const Home: NextPage = () => {
   return (

@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app';
 import Axios from 'axios';
 import { AuthProvider } from '../context/auth';
 import { useRouter } from 'next/router';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/common/NavBar';
 import axios from 'axios';
 import { SWRConfig } from 'swr';
 import Head from 'next/head';
