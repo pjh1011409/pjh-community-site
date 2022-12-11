@@ -3,7 +3,7 @@ import { errorMonitor } from 'events';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
-import InputGroup from '../../components/InputGroup';
+import InputGroup from '../../components/common/InputGroup';
 
 const SubCreate = () => {
   const [name, setName] = useState('');
