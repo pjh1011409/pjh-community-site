@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Introduce from '../components/mainPage/Introduce';
-import SubBar from '../components/mainPage/SubBar';
+import SubBar from '../components/mainPage/SideBar';
 import Search from '../components/common/Search';
 import PostList from '../components/mainPage/PostList';
 
