@@ -5,15 +5,7 @@ import Axios from 'axios';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import { useAuthState } from '../../context/auth';
-import styled from 'styled-components';
-
-const BackGround = styled.div`
-  background-color: #dbb0a9;
-  background-size: 3px 3px;
-  background-image: linear-gradient(0deg, hsla(0, 0%, 0%, 0) 0, #fffaf2 3px);
-  background-image: linear-gradient(90deg, hsla(0, 0%, 0%, 0) 0, #fffaf2 5px);
-  color: black;
-`;
+import { BackGround } from '../mainPage/Introduce';
 
 const SubHeader = () => {
   const [ownSub, setOwnSub] = useState(false);
@@ -22,16 +14,13 @@ const SubHeader = () => {
 
   const router = useRouter();
   const subName = router.query.sub;
-  const {
-    data: sub,
-    error,
-    mutate,
-  } = useSWR(subName ? `/subs/${subName}` : null);
+  const { data: sub, mutate } = useSWR(subName ? `/subs/${subName}` : null);
 
   useEffect(() => {
     if (!sub || !user) return;
     setOwnSub(authenticated && user.username === sub.username);
   }, [sub]);
+
   const openFileInput = (type: string) => {
     if (!ownSub) return;
     const fileInput = fileInputRef.current;

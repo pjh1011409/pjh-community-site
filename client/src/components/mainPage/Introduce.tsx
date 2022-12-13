@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ImageSlider from './Slider';
 import Image from 'next/image';
 
-const BackGround = styled.div`
+export const BackGround = styled.div`
   background-color: #dbb0a9;
   background-size: 3px 3px;
   background-image: linear-gradient(0deg, hsla(0, 0%, 0%, 0) 0, #fffaf2 3px);
