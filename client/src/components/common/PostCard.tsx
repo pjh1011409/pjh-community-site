@@ -65,7 +65,7 @@ const PostCard = ({
 
   return (
     <div
-      className="flex mb-4 bg-[#ebf3f9] rounded border-4 border-[#91bfe2] drop-shadow-2xl h-auto"
+      className="flex mb-4 bg-[#ebf3f9] rounded border-r-4 border-b-4 border border-[#91bfe2] drop-shadow-2xl h-auto"
       id={identifier}
     >
       {/* 좋아요 싫어요 기능 부분 */}
@@ -137,7 +137,10 @@ const PostCard = ({
         <Link href={url} className=" text-3xl font-extrabold text-[#14468c]">
           {title}
         </Link>
-        {body && <p className="my-2 text-lg">{body}</p>}
+        <div className="h-5 my-3">
+          {body && <p className="text-lg">{body}</p>}
+        </div>
+
         <div>
           <Link href={url} className="flex items-center">
             <RiMessage2Fill />
