@@ -4,20 +4,26 @@ import multer, { FileFilterCallback } from 'multer';
 import { Request, Response, Router } from 'express';
 import Sub from '../entities/Sub';
 import Post from '../entities/Post';
+import { isEmpty } from 'class-validator';
 import Comment from '../entities/Comment';
 import { makeId } from '../utils/helpers';
 import { unlinkSync } from 'fs';
 import path from 'path';
+import User from '../entities/User';
+import { NextFunction } from 'express-serve-static-core';
 
 const createPost = async (req: Request, res: Response) => {
   const { title, body, sub } = req.body;
-  if (title.trim() === '') {
-    return res.status(400).json({ title: '제목은 비워둘 수 없습니다.' });
-  }
 
   const user = res.locals.user;
 
   try {
+    const errors: any = {};
+    if (isEmpty(title)) errors.title = '제목을 비워둘 수 없습니다.';
+    if (Object.keys(errors).length > 0) {
+      return res.status(400).json(errors);
+    }
+
     const subRecord = await Sub.findOneByOrFail({ name: sub });
     const post = new Post();
     post.title = title;
@@ -45,6 +51,8 @@ const getPost = async (req: Request, res: Response) => {
     if (res.locals.user) {
       post.setUserVote(res.locals.user);
     }
+
+    if (!post) return;
 
     return res.send(post);
   } catch (error) {
@@ -86,12 +94,44 @@ const deletePost = async (req: Request, res: Response) => {
       .where({ identifier: post.identifier })
       .execute();
 
+    const deleteImage = path.resolve(
+      process.cwd(),
+      'public',
+      'images',
+      post.imageUrn
+    );
+    unlinkSync(deleteImage);
+
     if (!postDelete) return;
 
     return res.json(postDelete);
   } catch (error) {
     console.log(error);
     return res.status(404).json({ error: '문제가 발생하였습니다.' });
+  }
+};
+
+const ownPost = async (req: Request, res: Response, next: NextFunction) => {
+  const user: User = res.locals.user;
+  const { postId } = req.params;
+  console.log(req.params.postId);
+
+  try {
+    const post = await Post.findOneOrFail({
+      where: { identifier: postId },
+    });
+    if (post.username !== user.username) {
+      return res
+        .status(403)
+        .json({ error: '사용자님의 소유 게시글이 아닙니다.' });
+    }
+
+    res.locals.post = post;
+
+    return next();
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: '문제가 발생하였습니다' });
   }
 };
 
@@ -115,8 +155,8 @@ const upload = multer({
 
 const uploadPostImage = async (req: Request, res: Response) => {
   const post: Post = res.locals.post;
+  console.log(post);
 
-  console.log('post', res.locals.post);
   try {
     const type = req.body.type;
 
@@ -124,7 +164,6 @@ const uploadPostImage = async (req: Request, res: Response) => {
       if (!req.file?.path) {
         return res.status(400).json({ error: '유효하지 않는 파일입니다.' });
       }
-
       unlinkSync(req.file.path);
       return res.status(400).json({ error: '잘못된 유형입니다.' });
     }
@@ -147,7 +186,6 @@ const uploadPostImage = async (req: Request, res: Response) => {
       unlinkSync(fullFilename);
     }
 
-    console.log('post', post);
     return res.json(post);
   } catch (error) {
     console.log(error);
@@ -208,7 +246,6 @@ const deletePostComment = async (req: Request, res: Response) => {
       .execute();
 
     if (!comments) return;
-
     return res.json(comments);
   } catch (error) {
     console.log(error);
@@ -244,9 +281,10 @@ router.get('/:identifier/:slug', userMiddleware, getPost);
 router.delete('/:identifier/:slug', userMiddleware, deletePost);
 
 router.post(
-  '/:title/upload',
+  '/:postId/upload',
   userMiddleware,
   authMiddleware,
+  ownPost,
   upload.single('file'),
   uploadPostImage
 );

@@ -65,7 +65,7 @@ export default class Post extends BaseEntity {
   get imageUrl(): string {
     return this.imageUrn
       ? `${process.env.APP_URL}/images/${this.imageUrn}`
-      : 'https://www.gravatar.com/avatar?d=mp&f=y';
+      : null;
   }
 
   @Expose() get url(): string {
