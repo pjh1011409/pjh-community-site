@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
-import SideBar from '../../components/subPage/SideBar';
+import SideBar from '../../components/subPage/SubBar';
 import useSWR from 'swr';
 import PostCard from '../../components/common/PostCard';
 import { Post } from '../../types';
@@ -9,11 +9,7 @@ import SubHeader from '../../components/subPage/SubHeader';
 const SubPage = () => {
   const router = useRouter();
   const subName = router.query.sub;
-  const {
-    data: sub,
-    error,
-    mutate,
-  } = useSWR(subName ? `/subs/${subName}` : null);
+  const { data: sub, mutate } = useSWR(subName ? `/subs/${subName}` : null);
 
   let renderPosts;
   if (!sub) {

@@ -1,12 +1,15 @@
+import * as React from 'react';
+import Axios from 'axios';
 import Link from 'next/link';
 import dayjs from 'dayjs';
 import { BsHandThumbsUpFill } from 'react-icons/bs';
 import { Post } from '../../types';
+import Image from 'next/image';
+import { useAuthState } from '../../context/auth';
 
 interface ContentsProps {
   post: Post;
   subMutate?: () => void;
-  mutate?: () => void;
   vote: (value: number) => void;
 }
 
@@ -48,19 +51,21 @@ const Contents = ({ post, vote }: ContentsProps) => {
             {dayjs(post.createdAt).add(9, 'hour').format('YYYY.MM.DD HH:mm')}
           </div>
         </div>
-        {/* {post && (
-            <Image
-              src={post.imageUrl}
-              alt="커뮤니티 이미지"
-              width={70}
-              height={70}
-              className="rounded-full"
-              onClick={() => openFileInput('image')}
-            />
-          )} */}
       </div>
       <div className="flex justify-start ml-5 md:ml-12  w-auto flex-wrap">
         <p className="my-3 text-xl font-bold"> 🗣 {post.body}</p>
+      </div>
+
+      <div className="flex justify-center">
+        {post.imageUrl && (
+          <Image
+            src={post.imageUrl}
+            alt="커뮤니티 이미지"
+            width={100}
+            height={100}
+            className="w-8/12 lg:w-5/12"
+          />
+        )}
       </div>
     </div>
   );

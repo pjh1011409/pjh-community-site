@@ -1,99 +1,29 @@
 import Axios from 'axios';
 import { GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
-import React, { FormEvent, useState, useEffect } from 'react';
-import { Post } from '../../../types';
+import React, { useState } from 'react';
+import CreateForm from '../../../components/postPage/CreateForm';
+import CreateImage from '../../../components/postPage/CreateImage';
 
 const PostCreate = () => {
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
-  const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const [done, setDone] = useState(true);
+  const [postId, setPostId] = useState('');
+  const [postSlug, setPostSlug] = useState('');
 
-  const router = useRouter();
-  const { sub: subName } = router.query;
-  const submitPost = async (e: FormEvent) => {
-    e.preventDefault();
-    if (title.trim() === '' || !subName) return;
-
-    try {
-      const { data: post } = await Axios.post<Post>('/posts', {
-        title: title.trim(),
-        body,
-        sub: subName,
-      });
-
-      router.push(`/r/${subName}/${post.identifier}/${post.slug}`);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // useEffect(() => {
-  //   if (!post || !user) return;
-  //   setOwnSub(authenticated && user.username === sub.username);
-  // }, [sub]);
-  // const openFileInput = (type: string) => {
-  //   if (!ownSub) return;
-  //   const fileInput = fileInputRef.current;
-  //   if (fileInput) {
-  //     fileInput.name = type;
-  //     fileInput.click();
-  //   }
-  // };
-
-  // const uploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (e.target.files === null) return;
-  //   const file = e.target.files[0];
-
-  //   const formData = new FormData();
-  //   formData.append('file', file);
-  //   formData.append('type', fileInputRef.current!.name);
-
-  //   try {
-  //     await Axios.post(`/posts/${title}/upload`, formData, {
-  //       headers: { 'context-Type': 'multipart/form-data' },
-  //     });
-  //   } catch (error: any) {
-  //     console.log(error);
-  //   }
-  // };
   return (
     <div className="flex flex-col justify-center pt-16">
-      <div className="w-10/12 mx-auto md:w-96">
-        <div className="p-4 bg-white rounded">
-          <h1 className="mb-3 text-lg">포스트 생성하기</h1>
-          <form onSubmit={submitPost}>
-            <div className="relative mb-2">
-              <input
-                type="text"
-                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-                placeholder="제목"
-                maxLength={20}
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-              />
-              <div
-                style={{ top: 10, right: 10 }}
-                className="absolute mb-2 text-sm text-gray-400 select-none"
-              >
-                {title.trim().length}/20
-              </div>
-            </div>
-            <textarea
-              rows={4}
-              placeholder="설명"
-              className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-              value={body}
-              onChange={e => setBody(e.target.value)}
-            />
-            <input type="file" ref={fileInputRef} />
-            <div className="flex justify-end">
-              <button className="px-4 py-1 text-sm font-semibold text-white bg-gray-400 border rounded">
-                생성하기
-              </button>
-            </div>
-          </form>
-        </div>
+      <div className="p-8 w-10/12 mx-auto md:w-7/12 lg:w-4/12 border-4 border-[#6d9acb]   bg-[#eaebed] rounded drop-shadow-2xl">
+        <h1 className="mb-3 text-xl font-extrabold text-center text-[#1a1982]">
+          게시글 생성하기
+        </h1>
+        {done ? (
+          <CreateForm
+            setDone={setDone}
+            setPostId={setPostId}
+            setPostSlug={setPostSlug}
+          />
+        ) : (
+          <CreateImage postId={postId} postSlug={postSlug} />
+        )}
       </div>
     </div>
   );
