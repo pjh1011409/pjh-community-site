@@ -14,7 +14,6 @@ import { makeId } from '../utils/helpers';
 
 const createSub = async (req: Request, res: Response, next) => {
   const { name, title, description } = req.body;
-
   try {
     const errors: any = {};
     if (isEmpty(name)) errors.name = '이름을 비워둘 수 없습니다.';
@@ -27,8 +26,9 @@ const createSub = async (req: Request, res: Response, next) => {
 
     if (sub) errors.name = '이미 게시글이 존재합니다.';
     if (Object.keys(errors).length > 0) {
-      throw errors;
+      return res.status(400).json(errors);
     }
+    console.log(errors);
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: '문제가 발생했습니다.' });
@@ -126,6 +126,21 @@ const deleteSub = async (req: Request, res: Response) => {
       .from(Sub)
       .where({ name: community.name })
       .execute();
+
+    const deleteImage = path.resolve(
+      process.cwd(),
+      'public',
+      'images',
+      community.imageUrn
+    );
+    const deleteBanner = path.resolve(
+      process.cwd(),
+      'public',
+      'images',
+      community.bannerUrn
+    );
+    unlinkSync(deleteImage);
+    unlinkSync(deleteBanner);
 
     if (!sub) return;
 
