@@ -25,6 +25,7 @@ export interface Post {
   title: string;
   slug: string;
   body: string;
+  imageUrn: string;
   subName: string;
   username: string;
   createdAt: string;
@@ -35,6 +36,8 @@ export interface Post {
   userVote?: number;
   voteScore?: number;
   commentCount?: number;
+
+  imageUrl: string;
 }
 
 export interface User {

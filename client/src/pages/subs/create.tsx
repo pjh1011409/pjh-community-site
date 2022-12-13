@@ -17,18 +17,19 @@ const SubCreate = () => {
 
     try {
       const res = await axios.post('/subs', { name, title, description });
-
       router.push(`/r/${res.data.name}`);
     } catch (error: any) {
       console.log(error);
-      setErrors(error.response.data);
+      setErrors(error.response.data || {});
     }
   };
 
   return (
     <div className="flex flex-col justify-center pt-16">
-      <div className="w-10/12 p-4 mx-auto bg-white rounded md:w-96">
-        <h1 className="mb-2 text-lg font-medium">커뮤니티 만들기</h1>
+      <div className="w-10/12 p-4 mx-auto md:w-96 border-4 border-[#6d9acb]   bg-[#eaebed] rounded drop-shadow-2xl">
+        <h1 className="mb-2 text-xl font-extrabold text-center text-[#1a1982]">
+          커뮤니티 만들기
+        </h1>
         <hr />
         <form onSubmit={handleSubmit}>
           <div className="my-6">
@@ -41,6 +42,7 @@ const SubCreate = () => {
               value={name}
               setValue={setName}
               error={errors.name}
+              type={'text'}
             />
           </div>
           <div className="my-6">
@@ -53,6 +55,7 @@ const SubCreate = () => {
               value={title}
               setValue={setTitle}
               error={errors.title}
+              type={'text'}
             />
           </div>
           <div className="my-6">
@@ -65,11 +68,12 @@ const SubCreate = () => {
               value={description}
               setValue={setDescription}
               error={errors.description}
+              type={'text'}
             />
           </div>
-          <div className="flex justify-end">
-            <button className="px-4 py-1 text-sm font-semibold text-white bg-gray-400 border rounded">
-              커뮤니티 만들기
+          <div className="flex justify-center">
+            <button className="px-4 py-2 text-sm font-semibold text-white bg-[#467fce]  hover:bg-[#3163a8] rounded">
+              CREATE
             </button>
           </div>
         </form>
