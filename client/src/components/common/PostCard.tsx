@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Axios from 'axios';
 import dayjs from 'dayjs';
+import Highlighter from 'react-highlight-words';
 import { BsHandThumbsUpFill, BsTrashFill } from 'react-icons/bs';
 import { RiMessage2Fill } from 'react-icons/ri';
 import { useAuthState } from 'context/auth';
@@ -13,6 +14,7 @@ interface PostCardProps {
   post: Post;
   subMutate?: () => void;
   mutate?: () => void;
+  search: string;
 }
 
 const PostCard = ({
@@ -32,6 +34,7 @@ const PostCard = ({
   },
   mutate,
   subMutate,
+  search,
 }: PostCardProps) => {
   const router = useRouter();
   const isInSubPage = router.pathname === '/r/[sub]';
@@ -89,33 +92,46 @@ const PostCard = ({
                   src={sub!.imageUrl}
                   alt="sub"
                   className="rounded-full cursor-pointer"
-                  width={20}
+                  width={25}
                   height={25}
                 />
               </Link>
               <Link
                 href={`/r/${subName}`}
-                className="ml-2 mx-1 text-sm font-bold cursor-pointer  text-gray-500 underline hover:text-gray-900"
+                className="ml-2 mx-1 text-xs font-bold cursor-pointer  text-gray-500 underline hover:text-gray-900"
               >
-                #{sub?.title}
+                {sub?.title && (
+                  <Highlighter
+                    searchWords={[search]}
+                    autoEscape={true}
+                    textToHighlight={sub.title}
+                  />
+                )}
               </Link>
-              <span className="mx-1  text-sm text-gray-400">•</span>
+              <span className="mx-1 text-sm text-gray-400">•</span>
             </div>
           )}
 
-          <p className="text-xs md:text-sm text-gray-500">
+          <p className="text-xs text-gray-500">
+            {' '}
             Posted by
             <Link
               href={`/u/${username}`}
               className="mx-1  cursor-pointer underline  hover:text-gray-900"
             >
-              {username} 님
+              {sub?.username && (
+                <Highlighter
+                  searchWords={[search]}
+                  autoEscape={true}
+                  textToHighlight={`${username}님`}
+                />
+              )}
             </Link>
           </p>
-          <span className="mx-1 text-sm text-gray-400">•</span>
+          <span className="mx-1 text-xs text-gray-400">•</span>
           <Link
             href={url}
-            className="mx-1 underline text-sm text-gray-500  hover:text-gray-900"
+            className="mx-1 underline text-xs text-gray-500  hover:text-gray-900"
           >
             {dayjs(createdAt).add(9, 'hour').format('YYYY-MM-DD HH:mm')}
           </Link>
@@ -134,10 +150,26 @@ const PostCard = ({
         </div>
 
         <Link href={url} className=" text-3xl font-extrabold text-[#14468c]">
-          {title}
+          {title && (
+            <Highlighter
+              searchWords={[search]}
+              autoEscape={true}
+              textToHighlight={title}
+            />
+          )}
         </Link>
         <div className="h-5 my-3">
-          {body && <p className="text-lg">{body}</p>}
+          {body && (
+            <p className="text-lg">
+              {body && (
+                <Highlighter
+                  searchWords={[search]}
+                  autoEscape={true}
+                  textToHighlight={body}
+                />
+              )}
+            </p>
+          )}
         </div>
 
         <div>

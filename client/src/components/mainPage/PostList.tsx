@@ -52,6 +52,14 @@ const PostList = ({ search }: PostListProps) => {
     ) {
       return val;
     }
+    if (
+      val.subName
+        .replace(/ /g, '')
+        .toLowerCase()
+        .includes(search.toLowerCase().replace(/ /g, ''))
+    ) {
+      return val;
+    }
   });
 
   const [observedPost, setObserverPost] = useState('');
@@ -88,8 +96,16 @@ const PostList = ({ search }: PostListProps) => {
     <>
       <div className="w-full md:mr-3 md:w-7/12 mx-auto my-4 h-auto">
         {isInitialLoading && <Shimmer />}
+
         {posts.map(post => (
-          <PostCard post={post} key={post.identifier} mutate={mutate} />
+          <>
+            <PostCard
+              post={post}
+              key={post.identifier}
+              mutate={mutate}
+              search={search}
+            />
+          </>
         ))}
         {isValidating && posts.length > 0 && <Shimmer />}
       </div>
