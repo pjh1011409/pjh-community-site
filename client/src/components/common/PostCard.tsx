@@ -103,11 +103,11 @@ const PostCard = ({
               >
                 #{sub?.title}
               </Link>
-              <span className="mx-1 text-sm text-gray-400">•</span>
+              <span className="mx-1  text-sm text-gray-400">•</span>
             </div>
           )}
 
-          <p className="text-sm text-gray-500">
+          <p className="text-xs md:text-sm text-gray-500">
             Posted by
             <Link
               href={`/u/${username}`}
@@ -115,11 +115,14 @@ const PostCard = ({
             >
               {username} 님
             </Link>
-            <span className="mx-1 text-sm text-gray-400">•</span>
-            <Link href={url} className="mx-1 underline  hover:text-gray-900">
-              {dayjs(createdAt).add(9, 'hour').format('YYYY-MM-DD HH:mm')}
-            </Link>
           </p>
+          <span className="mx-1 text-sm text-gray-400">•</span>
+          <Link
+            href={url}
+            className="mx-1 underline text-sm text-gray-500  hover:text-gray-900"
+          >
+            {dayjs(createdAt).add(9, 'hour').format('YYYY-MM-DD HH:mm')}
+          </Link>
           <div className="flex ml-auto">
             {authenticated && user?.username === username ? (
               <button

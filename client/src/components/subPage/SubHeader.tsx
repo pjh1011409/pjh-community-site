@@ -5,7 +5,6 @@ import Axios from 'axios';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import { useAuthState } from '../../context/auth';
-import { BackGround } from '../mainPage/Introduce';
 
 const SubHeader = () => {
   const [ownSub, setOwnSub] = useState(false);
@@ -87,34 +86,30 @@ const SubHeader = () => {
           )}
         </div>
         {/* 커뮤니티 메타 데이터 */}
-        <BackGround>
-          <div className="h-20 ">
-            <div className="relative flex max-w-5xl px-5 mx-auto">
-              <div className="absolute" style={{ top: -20 }}>
-                {sub.imageUrl && (
-                  <Image
-                    src={sub.imageUrl}
-                    alt="커뮤니티 이미지"
-                    width={70}
-                    height={70}
-                    className="rounded-full"
-                    onClick={() => openFileInput('image')}
-                  />
-                )}
+        <div className="h-20 bg-[#dbb0a9]">
+          <div className="relative flex max-w-5xl px-5 mx-auto">
+            <div className="absolute" style={{ top: -20 }}>
+              {sub.imageUrl && (
+                <Image
+                  src={sub.imageUrl}
+                  alt="커뮤니티 이미지"
+                  width={70}
+                  height={70}
+                  className="rounded-full"
+                  onClick={() => openFileInput('image')}
+                />
+              )}
+            </div>
+            <div className="pt-1 pl-24">
+              <div className="flex items-center">
+                <h1 className="text-2xl font-extrabold text-[#394303]">
+                  {sub.title}
+                </h1>
               </div>
-              <div className="pt-1 pl-24">
-                <div className="flex items-center">
-                  <h1 className="text-2xl font-extrabold text-[#394303]">
-                    {sub.title}
-                  </h1>
-                </div>
-                <p className="font-bold text-gray-600 text-small">
-                  #{sub.name}
-                </p>
-              </div>
+              <p className="font-bold text-gray-600 text-small">#{sub.name}</p>
             </div>
           </div>
-        </BackGround>
+        </div>
       </div>
     </div>
   );

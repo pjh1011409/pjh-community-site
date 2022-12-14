@@ -1,20 +1,11 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import ImageSlider from './Slider';
 import Image from 'next/image';
 
-export const BackGround = styled.div`
-  background-color: #dbb0a9;
-  background-size: 3px 3px;
-  background-image: linear-gradient(0deg, hsla(0, 0%, 0%, 0) 0, #fffaf2 3px);
-  background-image: linear-gradient(90deg, hsla(0, 0%, 0%, 0) 0, #fffaf2 5px);
-  color: black;
-`;
-
 const Introduce = () => {
   return (
-    <BackGround>
-      <div className="flex max-w-5xl px-4 pt-5  flex-wrap-reverse mx-auto ">
+    <div className="bg-[#dbb0a9] bg-opacity-60">
+      <div className="flex max-w-5xl px-4 pt-5  flex-wrap-reverse mx-auto  ">
         <div className="w-10/12  md:w-5/12  my-4 mx-auto drop-shadow-2xl ">
           <ImageSlider />
         </div>
@@ -70,7 +61,7 @@ const Introduce = () => {
           </div>
         </div>
       </div>
-    </BackGround>
+    </div>
   );
 };
 

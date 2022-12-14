@@ -22,8 +22,8 @@ export default function ImageSlider() {
             <Image
               src={`${img}`}
               alt="동물사진"
-              width={400}
-              height={400}
+              width={100}
+              height={100}
               className="mx-auto rounded-xl w-full"
             />
           </div>
