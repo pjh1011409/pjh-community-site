@@ -5,7 +5,11 @@ import { useEffect, useState } from 'react';
 import PostCard from '../common/PostCard';
 import Shimmer from '../common/Shimmer';
 
-const PostList = () => {
+interface PostListProps {
+  search: string;
+}
+
+const PostList = ({ search }: PostListProps) => {
   const getKey = (pageIndex: number, previousPageData: Post[]) => {
     if (previousPageData && !previousPageData.length) return null;
     return `/posts?page=${pageIndex}`;
@@ -21,7 +25,34 @@ const PostList = () => {
   } = useSWRInfinite<Post[]>(getKey);
   const isInitialLoading = !data && !error;
 
-  const posts: Post[] = data ? ([] as Post[]).concat(...data) : [];
+  let posts: Post[] = data ? ([] as Post[]).concat(...data) : [];
+
+  posts = posts.filter(val => {
+    if (
+      val.title
+        .replace(/ /g, '')
+        .toLowerCase()
+        .includes(search.toLowerCase().replace(/ /g, ''))
+    ) {
+      return val;
+    }
+    if (
+      val.body
+        .replace(/ /g, '')
+        .toLowerCase()
+        .includes(search.toLowerCase().replace(/ /g, ''))
+    ) {
+      return val;
+    }
+    if (
+      val.username
+        .replace(/ /g, '')
+        .toLowerCase()
+        .includes(search.toLowerCase().replace(/ /g, ''))
+    ) {
+      return val;
+    }
+  });
 
   const [observedPost, setObserverPost] = useState('');
 

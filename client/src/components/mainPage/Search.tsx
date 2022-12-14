@@ -1,7 +1,17 @@
 import * as React from 'react';
+import { Dispatch, SetStateAction, ChangeEvent } from 'react';
 import { FaSearch } from 'react-icons/fa';
 
-const Search = () => {
+interface SearchProps {
+  setSearch: Dispatch<SetStateAction<string>>;
+}
+
+const Search = ({ setSearch }: SearchProps) => {
+  const searchPost = async (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setSearch(e.target.value);
+  };
+
   return (
     <>
       <div className=" w-full  mx-auto mb-3 ">
@@ -11,6 +21,7 @@ const Search = () => {
             type="text"
             placeholder="Search..."
             className="px-3 py-1 bg-transparent rounded h-7 focus:outline-none"
+            onChange={searchPost}
           />
         </div>
       </div>

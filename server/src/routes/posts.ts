@@ -11,6 +11,7 @@ import { unlinkSync } from 'fs';
 import path from 'path';
 import User from '../entities/User';
 import { NextFunction } from 'express-serve-static-core';
+import { ILike } from 'typeorm';
 
 const createPost = async (req: Request, res: Response) => {
   const { title, body, sub } = req.body;
