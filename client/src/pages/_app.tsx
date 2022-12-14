@@ -1,11 +1,10 @@
-import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import Axios from 'axios';
-import { AuthProvider } from '../context/auth';
 import { useRouter } from 'next/router';
-import NavBar from '../components/common/NavBar';
-import axios from 'axios';
+import { AuthProvider } from 'context/auth';
+import Axios from 'axios';
 import { SWRConfig } from 'swr';
+import '../styles/globals.css';
+import NavBar from 'components/common/NavBar';
 
 export default function App({ Component, pageProps }: AppProps) {
   Axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_BASE_URL + '/api';
@@ -17,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const fetcher = async (url: string) => {
     try {
-      const res = await axios.get(url);
+      const res = await Axios.get(url);
       return res.data;
     } catch (error: any) {
       throw error.response.data;

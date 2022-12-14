@@ -1,8 +1,7 @@
-import Axios from 'axios';
-import { GetServerSideProps } from 'next';
 import React, { useState } from 'react';
-import CreateForm from '../../../components/postPage/CreateForm';
-import CreateImage from '../../../components/postPage/CreateImage';
+import { GetServerSideProps } from 'next';
+import Axios from 'axios';
+import { CreateForm, CreateImage } from 'components';
 
 const PostCreate = () => {
   const [done, setDone] = useState(true);

@@ -1,10 +1,8 @@
-import { useRouter } from 'next/router';
 import React from 'react';
+import { useRouter } from 'next/router';
 import useSWR from 'swr';
-import PostCard from '../../components/common/PostCard';
-import CommentList from '../../components/userPage/CommentList';
-import UserInfo from '../../components/userPage/UserInfo';
-import { Comment, Post } from '../../types/types';
+import { Comment, Post } from 'types/types';
+import { PostCard, Comments, UserInfo } from 'components';
 
 const UserPage = () => {
   const router = useRouter();
@@ -27,7 +25,7 @@ const UserPage = () => {
             );
           } else {
             const comment: Comment = data;
-            return <CommentList key={comment.identifier} comment={comment} />;
+            return <Comments key={comment.identifier} comment={comment} />;
           }
         })}
       </div>

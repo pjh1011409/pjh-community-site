@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Axios from 'axios';
 import { useRouter } from 'next/router';
+import Axios from 'axios';
 import useSWR from 'swr';
-import { useAuthState } from '../../context/auth';
+import { useAuthState } from 'context/auth';
 
 const SubHeader = () => {
   const [ownSub, setOwnSub] = useState(false);

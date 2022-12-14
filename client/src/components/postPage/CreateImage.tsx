@@ -1,7 +1,6 @@
-import Axios from 'axios';
 import React from 'react';
 import { useRouter } from 'next/router';
-
+import Axios from 'axios';
 interface CreateImageProps {
   postId: string;
   postSlug: string;

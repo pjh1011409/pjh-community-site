@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { useState, FormEvent } from 'react';
-import InputGroup from '../components/common/InputGroup';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { useAuthDispatch } from '../context/auth';
-import { useAuthState } from '../context/auth';
+import { useAuthDispatch } from 'context/auth';
+import { useAuthState } from 'context/auth';
 import { FaCat } from 'react-icons/fa';
+import { InputGroup } from 'components';
 
 const login = () => {
   const [username, setUsername] = useState('');

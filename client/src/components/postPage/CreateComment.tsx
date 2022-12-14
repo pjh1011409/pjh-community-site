@@ -1,12 +1,10 @@
 import React from 'react';
-import Axios from 'axios';
-import Link from 'next/link';
-
-import { useAuthState } from '../../context/auth';
 import { FormEvent, useState } from 'react';
-
+import Link from 'next/link';
+import Axios from 'axios';
+import { useAuthState } from 'context/auth';
+import { Post } from 'types/types';
 import { RiMessage2Fill } from 'react-icons/ri';
-import { Post } from '../../types/types';
 
 interface CreateCommentProps {
   post: Post;

@@ -1,7 +1,7 @@
-import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useAuthDispatch, useAuthState } from '../../context/auth';
+import axios from 'axios';
+import { useAuthDispatch, useAuthState } from 'context/auth';
 
 export const NavBar: React.FC = () => {
   const { loading, authenticated, user } = useAuthState();

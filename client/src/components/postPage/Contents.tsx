@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Link from 'next/link';
-import dayjs from 'dayjs';
-import { BsHandThumbsUpFill } from 'react-icons/bs';
-import { Post } from '../../types/types';
 import Image from 'next/image';
+import dayjs from 'dayjs';
+import { Post } from 'types/types';
+import { BsHandThumbsUpFill } from 'react-icons/bs';
 
 interface ContentsProps {
   post: Post;

@@ -1,11 +1,9 @@
-import Axios from 'axios';
 import { useRouter } from 'next/router';
+import Axios from 'axios';
 import useSWR from 'swr';
-import { Comment, Post } from '../../../../types/types';
-import { useAuthState } from '../../../../context/auth';
-import CreateComment from '../../../../components/postPage/CreateComment';
-import CommentList from '../../../../components/postPage/CommentList';
-import Contents from '../../../../components/postPage/Contents';
+import { Comment, Post } from 'types/types';
+import { useAuthState } from 'context/auth';
+import { CreateComment, CommentList, Contents } from 'components';
 
 const PostPage = () => {
   const router = useRouter();

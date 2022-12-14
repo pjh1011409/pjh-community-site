@@ -1,14 +1,13 @@
-import axios from 'axios';
-import dayjs from 'dayjs';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import Axios from 'axios';
+import dayjs from 'dayjs';
 import { BsHandThumbsUpFill, BsTrashFill } from 'react-icons/bs';
 import { RiMessage2Fill } from 'react-icons/ri';
-import { useAuthState } from '../../context/auth';
-import { Post } from '../../types/types';
-import Axios from 'axios';
+import { useAuthState } from 'context/auth';
+import { Post } from 'types/types';
 
 interface PostCardProps {
   post: Post;
@@ -45,7 +44,7 @@ const PostCard = ({
     if (value === userVote) value = 0;
 
     try {
-      await axios.post('/votes', { identifier, slug, value });
+      await Axios.post('/votes', { identifier, slug, value });
       if (mutate) mutate();
       if (subMutate) subMutate();
     } catch (error) {

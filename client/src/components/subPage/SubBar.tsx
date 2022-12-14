@@ -1,10 +1,10 @@
-import Link from 'next/link';
 import React, { FormEvent, useState } from 'react';
-import { useAuthState } from '../../context/auth';
-import { Sub } from '../../types/types';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import dayjs from 'dayjs';
 import Axios from 'axios';
-import { useRouter } from 'next/router';
+import { useAuthState } from 'context/auth';
+import { Sub } from 'types/types';
 import { BsTrashFill, BsPencilSquare } from 'react-icons/bs';
 
 type Props = {

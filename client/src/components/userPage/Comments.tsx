@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Comment } from '../../types/types';
 import Link from 'next/link';
+import { Comment } from 'types/types';
 import { RiMessage2Fill } from 'react-icons/ri';
 
 interface CommentProps {

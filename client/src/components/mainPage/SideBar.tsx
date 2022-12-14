@@ -2,9 +2,9 @@ import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import useSWR from 'swr';
-import { Sub } from '../../types/types';
-import { useAuthState } from '../../context/auth';
 import Axios from 'axios';
+import { Sub } from 'types/types';
+import { useAuthState } from 'context/auth';
 import { ImNewspaper } from 'react-icons/im';
 
 const SubBar = () => {

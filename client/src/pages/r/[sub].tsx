@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
-import SideBar from '../../components/subPage/SubBar';
 import useSWR from 'swr';
-import PostCard from '../../components/common/PostCard';
-import { Post } from '../../types/types';
-import SubHeader from '../../components/subPage/SubHeader';
+import { Post } from 'types/types';
+import { SubBar, SubHeader, PostCard } from 'components';
 
 const SubPage = () => {
   const router = useRouter();
@@ -31,7 +29,7 @@ const SubPage = () => {
           <SubHeader />
           <div className="flex flex-wrap-reverse max-w-6xl px-4 pt-5 justify-center mx-auto">
             <div className="w-full md:mr-3 md:w-6/12">{renderPosts}</div>
-            <SideBar sub={sub} mutate={mutate} />
+            <SubBar sub={sub} mutate={mutate} />
           </div>
         </>
       )}

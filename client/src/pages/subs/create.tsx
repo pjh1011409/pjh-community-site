@@ -1,8 +1,8 @@
-import axios from 'axios';
+import { FormEvent, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import { FormEvent, useState } from 'react';
-import InputGroup from '../../components/common/InputGroup';
+import Axios from 'axios';
+import { InputGroup } from 'components';
 
 const SubCreate = () => {
   const [name, setName] = useState('');
@@ -15,7 +15,7 @@ const SubCreate = () => {
     event.preventDefault();
 
     try {
-      const res = await axios.post('/subs', { name, title, description });
+      const res = await Axios.post('/subs', { name, title, description });
       router.push(`/r/${res.data.name}`);
     } catch (error: any) {
       console.log(error);
@@ -88,7 +88,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     const cookie = req.headers.cookie;
     if (!cookie) throw new Error('Missing auth token cookie');
 
-    await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/auth/me`, {
+    await Axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/auth/me`, {
       headers: { cookie },
     });
     return { props: {} };

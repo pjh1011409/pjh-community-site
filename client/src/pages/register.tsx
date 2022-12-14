@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { useState } from 'react';
-import InputGroup from '../components/common/InputGroup';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Axios from 'axios';
-import { useAuthState } from '../context/auth';
+import { useAuthState } from 'context/auth';
 import { FaDog } from 'react-icons/fa';
+import { InputGroup } from 'components';
 
 const register = () => {
   const [email, setEmail] = useState('');

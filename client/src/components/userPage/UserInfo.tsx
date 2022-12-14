@@ -1,6 +1,6 @@
-import dayjs from 'dayjs';
 import React from 'react';
-import { User } from '../../types/types';
+import dayjs from 'dayjs';
+import { User } from 'types/types';
 
 interface DataProps {
   user: User;

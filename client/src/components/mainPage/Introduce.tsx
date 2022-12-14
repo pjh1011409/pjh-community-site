@@ -1,6 +1,6 @@
 import * as React from 'react';
-import ImageSlider from './Slider';
 import Image from 'next/image';
+import ImageSlider from './Slider';
 
 const Introduce = () => {
   return (

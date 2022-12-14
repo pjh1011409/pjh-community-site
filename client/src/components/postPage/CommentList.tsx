@@ -1,12 +1,12 @@
-import Axios from 'axios';
+import { FormEvent, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import dayjs from 'dayjs';
-import { useAuthState } from '../../context/auth';
-import { FormEvent, useState } from 'react';
+import Axios from 'axios';
+import { useAuthState } from 'context/auth';
+import { Comment } from 'types/types';
 import { BsTrashFill, BsPencilSquare } from 'react-icons/bs';
 import { BsHandThumbsUpFill } from 'react-icons/bs';
-import { Comment } from '../../types/types';
 
 interface CommentListProps {
   comments: Comment[] | undefined;

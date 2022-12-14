@@ -1,8 +1,8 @@
-import Axios from 'axios';
-import { useRouter } from 'next/router';
 import React, { FormEvent, useState, Dispatch, SetStateAction } from 'react';
-import { Post } from '../../types/types';
+import { useRouter } from 'next/router';
 import cls from 'classnames';
+import Axios from 'axios';
+import { Post } from 'types/types';
 
 interface CreateFormProps {
   setDone: Dispatch<SetStateAction<boolean>>;

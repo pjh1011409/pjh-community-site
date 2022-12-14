@@ -1,9 +1,6 @@
-import type { NextPage } from 'next';
-import Introduce from '../components/mainPage/Introduce';
-import SubBar from '../components/mainPage/SideBar';
-import Search from '../components/mainPage/Search';
-import PostList from '../components/mainPage/PostList';
 import { useState } from 'react';
+import type { NextPage } from 'next';
+import { Introduce, SideBar, Search, PostList } from 'components';
 
 const Home: NextPage = () => {
   const [search, setSearch] = useState('');
@@ -15,7 +12,7 @@ const Home: NextPage = () => {
         <PostList search={search} />
         <div className=" w-full md:w-3/12 my-4 mx-auto">
           <Search setSearch={setSearch} />
-          <SubBar />
+          <SideBar />
         </div>
       </div>
     </>
