@@ -124,20 +124,24 @@ const deleteSub = async (req: Request, res: Response) => {
       .where({ name: community.name })
       .execute();
 
-    const deleteImage = path.resolve(
-      process.cwd(),
-      'public',
-      'images',
-      community.imageUrn
-    );
-    const deleteBanner = path.resolve(
-      process.cwd(),
-      'public',
-      'images',
-      community.bannerUrn
-    );
-    unlinkSync(deleteImage);
-    unlinkSync(deleteBanner);
+    if (community.imageUrn) {
+      const deleteImage = path.resolve(
+        process.cwd(),
+        'public',
+        'images',
+        community.imageUrn
+      );
+      unlinkSync(deleteImage);
+    }
+    if (community.bannerUrn) {
+      const deleteBanner = path.resolve(
+        process.cwd(),
+        'public',
+        'images',
+        community.bannerUrn
+      );
+      unlinkSync(deleteBanner);
+    }
 
     if (!sub) return;
 

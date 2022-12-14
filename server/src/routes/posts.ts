@@ -90,13 +90,15 @@ const deletePost = async (req: Request, res: Response) => {
       .where({ identifier: post.identifier })
       .execute();
 
-    const deleteImage = path.resolve(
-      process.cwd(),
-      'public',
-      'images',
-      post.imageUrn
-    );
-    unlinkSync(deleteImage);
+    if (post.imageUrn) {
+      const deleteImage = path.resolve(
+        process.cwd(),
+        'public',
+        'images',
+        post.imageUrn
+      );
+      unlinkSync(deleteImage);
+    }
 
     if (!postDelete) return;
 
