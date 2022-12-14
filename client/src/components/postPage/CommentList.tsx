@@ -6,7 +6,7 @@ import { useAuthState } from '../../context/auth';
 import { FormEvent, useState } from 'react';
 import { BsTrashFill, BsPencilSquare } from 'react-icons/bs';
 import { BsHandThumbsUpFill } from 'react-icons/bs';
-import { Comment } from '../../types';
+import { Comment } from '../../types/types';
 
 interface CommentListProps {
   comments: Comment[] | undefined;
@@ -50,16 +50,13 @@ const CommentList = ({ comments, commentMutate, vote }: CommentListProps) => {
 
   return (
     <div>
-      {/* 댓글 리스트 부분 */}
       <div className="ml-5 md:ml-12  my-4 w-10/12">
         {comments?.map(comment => (
           <div
             className="flex border-b-2 border-[#b3d0e7]"
             key={comment.identifier}
           >
-            {/* 좋아요 싫어요 기능 부분 */}
             <div className="flex-shrink-0 w-10 py-2 text-center rounded-l">
-              {/* 좋아요 */}
               <div
                 className="flex justify-center w-6 mx-auto text-gray-400 rounded cursor-pointer hover:bg-gray-300 hover:text-orange-500 "
                 onClick={() => vote(1, comment)}

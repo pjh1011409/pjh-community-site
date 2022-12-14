@@ -1,5 +1,5 @@
 import { createContext, useReducer, useContext, useEffect } from 'react';
-import { User } from '../types';
+import { User } from '../types/types';
 import axios from 'axios';
 
 interface State {

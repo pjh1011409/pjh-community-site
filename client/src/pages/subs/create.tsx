@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { errorMonitor } from 'events';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';

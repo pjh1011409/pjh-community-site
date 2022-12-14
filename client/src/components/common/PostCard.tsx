@@ -7,7 +7,7 @@ import React from 'react';
 import { BsHandThumbsUpFill, BsTrashFill } from 'react-icons/bs';
 import { RiMessage2Fill } from 'react-icons/ri';
 import { useAuthState } from '../../context/auth';
-import { Post } from '../../types';
+import { Post } from '../../types/types';
 import Axios from 'axios';
 
 interface PostCardProps {
@@ -68,9 +68,7 @@ const PostCard = ({
       className="flex mb-4 bg-[#ebf3f9] rounded border-r-4 border-b-4 border border-[#91bfe2] drop-shadow-2xl h-auto"
       id={identifier}
     >
-      {/* 좋아요 싫어요 기능 부분 */}
       <div className="flex-shrink-0 w-10 py-2 text-center rounded-l">
-        {/* 좋아요 */}
         <div
           className="flex justify-center w-6 mx-auto text-gray-400 rounded cursor-pointer hover:bg-gray-300 hover:text-orange-500 mt-2"
           onClick={() => vote(1)}
@@ -83,7 +81,6 @@ const PostCard = ({
         </div>
         <p className="text-xs font-bold">{voteScore}</p>
       </div>
-      {/* 포스트 데이터 부분 */}
       <div className="w-full p-2 ">
         <div className="flex items-center my-2">
           {!isInSubPage && (

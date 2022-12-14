@@ -1,11 +1,9 @@
 import * as React from 'react';
-import Axios from 'axios';
 import Link from 'next/link';
 import dayjs from 'dayjs';
 import { BsHandThumbsUpFill } from 'react-icons/bs';
-import { Post } from '../../types';
+import { Post } from '../../types/types';
 import Image from 'next/image';
-import { useAuthState } from '../../context/auth';
 
 interface ContentsProps {
   post: Post;

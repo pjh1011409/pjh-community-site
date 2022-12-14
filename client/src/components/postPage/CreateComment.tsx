@@ -6,7 +6,7 @@ import { useAuthState } from '../../context/auth';
 import { FormEvent, useState } from 'react';
 
 import { RiMessage2Fill } from 'react-icons/ri';
-import { Post } from '../../types';
+import { Post } from '../../types/types';
 
 interface CreateCommentProps {
   post: Post;
@@ -36,7 +36,6 @@ const CreateComment = ({ post, commentMutate }: CreateCommentProps) => {
 
   return (
     <div>
-      {/* 댓글 작성 구간 */}
       <div className="ml-5 mt-10 md:ml-12 ">
         <div className="flex items-center text-xl text-[#122b19]">
           <RiMessage2Fill />

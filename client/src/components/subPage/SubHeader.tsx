@@ -56,7 +56,6 @@ const SubHeader = () => {
         onChange={uploadImage}
       />
       <div>
-        {/* 배너 이미지 */}
         <div className="bg-[#e2e2e2]">
           {sub.bannerUrl ? (
             <>
@@ -85,7 +84,6 @@ const SubHeader = () => {
             </div>
           )}
         </div>
-        {/* 커뮤니티 메타 데이터 */}
         <div className="h-20 bg-[#dbb0a9]">
           <div className="relative flex max-w-5xl px-5 mx-auto">
             <div className="absolute" style={{ top: -20 }}>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Comment } from '../../types';
+import { Comment } from '../../types/types';
 import Link from 'next/link';
 import { RiMessage2Fill } from 'react-icons/ri';
 

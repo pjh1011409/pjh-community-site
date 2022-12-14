@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React, { FormEvent, useState } from 'react';
 import { useAuthState } from '../../context/auth';
-import { Sub } from '../../types';
+import { Sub } from '../../types/types';
 import dayjs from 'dayjs';
 import Axios from 'axios';
 import { useRouter } from 'next/router';

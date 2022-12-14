@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
-import { Comment, Post } from '../../../../types';
+import { Comment, Post } from '../../../../types/types';
 import { useAuthState } from '../../../../context/auth';
 import CreateComment from '../../../../components/postPage/CreateComment';
 import CommentList from '../../../../components/postPage/CommentList';

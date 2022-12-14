@@ -4,7 +4,7 @@ import useSWR from 'swr';
 import PostCard from '../../components/common/PostCard';
 import CommentList from '../../components/userPage/CommentList';
 import UserInfo from '../../components/userPage/UserInfo';
-import { Comment, Post } from '../../types';
+import { Comment, Post } from '../../types/types';
 
 const UserPage = () => {
   const router = useRouter();

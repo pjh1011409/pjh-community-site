@@ -1,6 +1,6 @@
 import * as React from 'react';
 import useSWRInfinite from 'swr/infinite';
-import { Post } from '../../types';
+import { Post } from '../../types/types';
 import { useEffect, useState } from 'react';
 import PostCard from '../common/PostCard';
 import Shimmer from '../common/Shimmer';

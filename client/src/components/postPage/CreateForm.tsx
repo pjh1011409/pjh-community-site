@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { FormEvent, useState, Dispatch, SetStateAction } from 'react';
-import { Post } from '../../types';
+import { Post } from '../../types/types';
 import cls from 'classnames';
 
 interface CreateFormProps {
