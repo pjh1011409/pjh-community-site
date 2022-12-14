@@ -31,11 +31,11 @@ export const NavBar: React.FC = () => {
       <div className="flex">
         {!loading &&
           (authenticated ? (
-            <div className="flex flex-wrap  md:w-44 justify-end max: w-24 text-[#d07e12] font-semibold text-md">
+            <div className="flex flex-wrap  md:w-44 justify-end max: w-30 text-[#d07e12] font-semibold text-md">
               <div className=" md:w-30 my-2">
                 <Link
                   href={`/u/${user?.username}`}
-                  className="mx-1 hover:underline w-24 px-2 mr-2 text-md text-center underline"
+                  className="mx-1 hover:underline  px-2 mr-2 text-md text-center underline"
                 >
                   {user?.username} 님
                 </Link>
