@@ -69,10 +69,11 @@ const SubHeader = () => {
                 }}
                 onClick={() => openFileInput('banner')}
               >
-                {' '}
-                <div className=" text-gray-800 text-xs mx-3 cursor-pointer">
-                  Change Image
-                </div>
+                {authenticated && user?.username === sub.username ? (
+                  <div className=" text-gray-800 text-xs mx-3 cursor-pointer">
+                    Change Image
+                  </div>
+                ) : null}
               </div>
             </>
           ) : (
@@ -80,7 +81,7 @@ const SubHeader = () => {
               className="h-20 bg-gray-400 flex items-end justify-center text-gray-500 text-xs cursor-pointer"
               onClick={() => openFileInput('banner')}
             >
-              Change Image
+              No Image
             </div>
           )}
         </div>
