@@ -1,8 +1,6 @@
 import { Request, Response, Router } from 'express';
-import User from '../entities/User';
-import userMiddleware from '../middlewares/user';
-import Post from '../entities/Post';
-import Comment from '../entities/Comment';
+import { userMiddleware } from '../middlewares';
+import { Post, Comment, User } from '../entities';
 
 const getUserData = async (req: Request, res: Response) => {
   try {

@@ -1,16 +1,13 @@
 import { Request, Response, Router } from 'express';
-import Post from '../entities/Post';
-import multer, { FileFilterCallback } from 'multer';
-import userMiddleware from '../middlewares/user';
-import authMiddleware from '../middlewares/auth';
-import { AppDataSource } from '../data-source';
-import Sub from '../entities/Sub';
-import { isEmpty } from 'class-validator';
-import User from '../entities/User';
 import { NextFunction } from 'express-serve-static-core';
+import { isEmpty } from 'class-validator';
+import multer, { FileFilterCallback } from 'multer';
+import { AppDataSource } from '../data-source';
 import path from 'path';
 import { unlinkSync } from 'fs';
 import { makeId } from '../utils/helpers';
+import { userMiddleware, authMiddleware } from '../middlewares';
+import { Sub, Post, User } from '../entities';
 
 const createSub = async (req: Request, res: Response, next) => {
   const { name, title, description } = req.body;

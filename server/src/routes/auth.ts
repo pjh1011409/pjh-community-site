@@ -1,11 +1,10 @@
-import { isEmpty, validate } from 'class-validator';
 import { Request, Response, Router } from 'express';
-import User from '../entities/User';
+import { isEmpty, validate } from 'class-validator';
 import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
 import bcrypt from 'bcryptjs';
-import userMiddleware from '../middlewares/user';
-import authMiddleware from '../middlewares/auth';
+import { userMiddleware, authMiddleware } from '../middlewares';
+import { User } from '../entities';
 
 const mapErrors = (errors: any[]) => {
   return errors.reduce((prev: any, err: any) => {

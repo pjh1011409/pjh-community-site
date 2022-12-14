@@ -1,10 +1,6 @@
 import { Request, Response, Router } from 'express';
-import userMiddleware from '../middlewares/user';
-import authMiddleware from '../middlewares/auth';
-import User from '../entities/User';
-import Post from '../entities/Post';
-import Vote from '../entities/Vote';
-import Comment from '../entities/Comment';
+import { userMiddleware, authMiddleware } from '../middlewares';
+import { Post, Vote, Comment, User } from '../entities';
 
 const vote = async (req: Request, res: Response) => {
   const { identifier, slug, commentIdentifier, value } = req.body;

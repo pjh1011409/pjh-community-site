@@ -1,17 +1,12 @@
-import userMiddleware from '../middlewares/user';
-import authMiddleware from '../middlewares/auth';
-import multer, { FileFilterCallback } from 'multer';
 import { Request, Response, Router } from 'express';
-import Sub from '../entities/Sub';
-import Post from '../entities/Post';
+import { NextFunction } from 'express-serve-static-core';
 import { isEmpty } from 'class-validator';
-import Comment from '../entities/Comment';
-import { makeId } from '../utils/helpers';
+import multer, { FileFilterCallback } from 'multer';
 import { unlinkSync } from 'fs';
 import path from 'path';
-import User from '../entities/User';
-import { NextFunction } from 'express-serve-static-core';
-import { ILike } from 'typeorm';
+import { makeId } from '../utils/helpers';
+import { authMiddleware, userMiddleware } from '../middlewares';
+import { Sub, Post, Comment, User } from '../entities';
 
 const createPost = async (req: Request, res: Response) => {
   const { title, body, sub } = req.body;
@@ -64,7 +59,7 @@ const getPost = async (req: Request, res: Response) => {
 
 const getPosts = async (req: Request, res: Response) => {
   const currentPage: number = (req.query.page || 0) as number;
-  const perPage: number = (req.query.count || 8) as number;
+  const perPage: number = (req.query.count || 5) as number;
 
   try {
     const posts = await Post.find({

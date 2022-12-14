@@ -1,11 +1,13 @@
 import express from 'express';
 import morgan from 'morgan';
 import { AppDataSource } from './data-source';
-import authRoutes from './routes/auth';
-import subRoutes from './routes/subs';
-import postRoutes from './routes/posts';
-import voteRoutes from './routes/votes';
-import userRoutes from './routes/users';
+import {
+  authRoutes,
+  subRoutes,
+  postRoutes,
+  voteRoutes,
+  userRoutes,
+} from './routes';
 
 import cookieParser from 'cookie-parser';
 
