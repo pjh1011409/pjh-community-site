@@ -21,7 +21,12 @@ const UserPage = () => {
           if (data.type === 'Post') {
             const post: Post = data;
             return (
-              <PostCard key={post.identifier} post={post} mutate={mutate} />
+              <PostCard
+                key={post.identifier}
+                post={post}
+                mutate={mutate}
+                search={''}
+              />
             );
           } else {
             const comment: Comment = data;
