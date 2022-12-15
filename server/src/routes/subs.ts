@@ -62,6 +62,8 @@ const topSubs = async (req: Request, res: Response) => {
       .limit(5)
       .execute();
 
+    if (!subs) return;
+
     return res.json(subs);
   } catch (error) {
     console.log(error);
