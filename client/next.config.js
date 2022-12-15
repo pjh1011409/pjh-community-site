@@ -3,7 +3,11 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['www.gravatar.com', 'localhost'],
+    domains: [
+      'www.gravatar.com',
+      'localhost',
+      'ec2-54-211-143-67.compute-1.amazonaws.com',
+    ],
   },
 };
 

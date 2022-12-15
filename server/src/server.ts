@@ -15,7 +15,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 const app = express();
-const origin = 'http://localhost:3000';
+const origin = process.env.ORIGIN;
 
 app.use(cors({ origin, credentials: true }));
 app.use(express.json());
@@ -35,7 +35,7 @@ app.use(express.static('public'));
 const port = 4000;
 
 app.listen(port, async () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at ${process.env.APP_URL}`);
 
   AppDataSource.initialize()
     .then(() => {
