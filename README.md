@@ -1,5 +1,6 @@
 ## 🐶 POP(Prod of pets) 🐱
 <strong>애완동물을 자랑스럽게!</strong>
+<br>
 <strong>자신의 펫을 마음껏 자랑하고, 펫지식을 공유하는 커뮤니티 사이트입니다.</strong>
 
 <br>
