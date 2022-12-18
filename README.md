@@ -1,25 +1,88 @@
-# 🐶 POP(Prod of pets) 🐱
+## 🐶 POP(Prod of pets) 🐱
 <strong>애완동물을 자랑스럽게!</strong>
-<strong>자신의 펫을 마음껏 자랑하고, 펫지식을 공유해보세요!</strong>
+<strong>자신의 펫을 마음껏 자랑하고, 펫지식을 공유하는 커뮤니티 사이트입니다.</strong>
 
----
+<br>
 
-# 🗓 프로젝트 기간
+## 🗓 프로젝트 기간
 
 2022.11.18 ~ 2022.12.18
-
-# 📎 Links
+  <br>
+## 📎 Link
 - Project homepage: 
 
----
-# 💻 Service Architecture
+<br>
+
+## 🍀 나의 개발일지
+
+<details>
+<summary>✏️ 프로젝트를 개발하며 작성한 개발블로그입니다.</summary>
+
+- [Start & Setting](https://velog.io/@pjh1011409/%E3%85%88-6jniie0o)  
+- [Entity 생성하기](https://velog.io/@pjh1011409/PJHs-Community-Site-Entity) 
+- [회원가입하기](https://velog.io/@pjh1011409/PJHs-Community-Site-Auth)
+- [로그인하기](https://velog.io/@pjh1011409/PJHs-Community-Site-Login)
+- [Context 재사용하기](https://velog.io/@pjh1011409/PJHs-Community-Site-Context)
+- [커뮤니티, 미들웨어 생성하기](https://velog.io/@pjh1011409/PJHs-Community-Site-Community)
+- [커뮤니티 리스트, nav바, 로그아웃 생성하기](https://velog.io/@pjh1011409/PJHs-Community-Site-Community2)
+- [상세피이지, 이미지 업로드, 사이드바 생성하기](https://velog.io/@pjh1011409/PJHs-Community-Site-Community3)
+- [게시글 생성, 조회하기](https://velog.io/@pjh1011409/PJHs-Community-Site-Post-Create)
+- [댓글달기, 투표하기](https://velog.io/@pjh1011409/PJHs-Community-Site-Comment-Vote)
+- [무한스크롤 구현하기](https://velog.io/@pjh1011409/PJHs-Community-Site-Infinite-Scroll)
+- [사용자 페이지 생성하기](https://velog.io/@pjh1011409/PJHs-Community-Site-User)
+- [수정, 삭제 기능 추가하기](https://velog.io/@pjh1011409/PJHs-Community-Site-Delete-Update)
+- [이미지 업로드, 검색하기](https://velog.io/@pjh1011409/PJHs-Community-Site-Image-Search)
+
+</details>
+ 
+  
+<br>
+
+## ⚙️ 주요 기능 
+
+- ##### 회원가입, 로그인 및 인증 🔐
+  
+
+- ##### 커뮤니티 🌈
+  - 로그인시 커뮤니티를 생성 가능
+  - 중복되는 이름의 커뮤니티는 생성할 수 없도록 유효성 검증
+  - 커뮤니티마다 게시글을 생성 가능
+  - 커뮤니티 프로필 이미지와 배너 이미지를 선택적으로 업로드 가능
+  - 본인이 생성한 커뮤니티에 한해서 수정, 삭제 가능
+
+- ##### 게시글 ✏️ 
+  - 로그인시 게시글을 생성 가능
+  - 게시글에 선택적으로 이미지 업로드 가능
+  - 본인이 작성한 게시글에 한해서 삭제 가능
+
+- ##### 댓글 달기 💬
+  - 로그인시 게시글마다 댓글 작성 가능
+
+- ##### 투표하기 👍 
+  - 게사글, 댓글에 좋아요 누르기 가능
+
+- ##### 검색하기 🔍 
+  - 메인페이지에서 전체 게시글에 대한 검색이 가능
+  - 검색시 입력한 텍스트에 대한 데이터에 하이라이트 출력
+
+- ##### 사용자 페이지 👤
+  - 해당 사용자가 작성한 게시글과 댓글 목록을 작성일자 순으로 조회 가능
+  - 해당 사용자의 가입날짜를 조회 가능
+
+  <br>
+
+
+
+<br>
+
+## 💻 Service Architecture
 
 <img width="800" alt="POP Structure" src="https://user-images.githubusercontent.com/81337674/208282368-622266b2-aa26-451f-95f5-412053261077.png">
 
 
----
+<br>
 
-# 📄 Project Architecture
+## 📄 Project Architecture
 
 #### Client
 
@@ -104,58 +167,30 @@
 ```
 
 
-# ⚙️ 주요 기능 
-
-- ##### 회원가입, 로그인 및 인증 🔐
-  
-
-- ##### 커뮤니티 🌈
-  - 로그인시 커뮤니티를 생성 가능
-  - 중복되는 이름의 커뮤니티는 생성할 수 없도록 유효성 검증
-  - 커뮤니티마다 게시글을 생성 가능
-  - 커뮤니티 프로필 이미지와 배너 이미지를 선택적으로 업로드 가능
-  - 본인이 생성한 커뮤니티에 한해서 수정, 삭제 가능
-
-- ##### 게시글 ✏️ 
-  - 로그인시 게시글을 생성 가능
-  - 게시글에 선택적으로 이미지 업로드 가능
-  - 본인이 작성한 게시글에 한해서 삭제 가능
-
-- ##### 댓글 달기 💬
-  - 로그인시 게시글마다 댓글 작성 가능
-
-- ##### 투표하기 👍 
-  - 게사글, 댓글에 좋아요 누르기 가능
-
-- ##### 검색하기 🔍 
-  - 메인페이지에서 전체 게시글에 대한 검색이 가능
-  - 검색시 입력한 텍스트에 대한 데이터에 하이라이트 출력
-
-- ##### 사용자 페이지 👤
-  - 해당 사용자가 작성한 게시글과 댓글 목록을 작성일자 순으로 조회 가능
-  - 해당 사용자의 가입날짜를 조회 가능
+<br>
 
 
----
-# ER Diagram
+## ER Diagram
 
 <img width="869" alt="POP ERD" src="https://user-images.githubusercontent.com/81337674/208286887-a145c447-52ba-4c50-88a1-2927f0177ee6.png">
 
----
-# API 설계
+<br>
 
-📎 [POP API 명세서 ( Notion )](https://www.notion.so/POP-Proud-of-Pets-API-abc32bae15f944a3bd9a57c93ec6a11e#8a6f745645eb4eb2b62a0ee9fe25a646) 
+## 📡 API 설계
+
+#### 📎 [POP API 명세서 ( Notion )](https://www.notion.so/POP-Proud-of-Pets-API-abc32bae15f944a3bd9a57c93ec6a11e#8a6f745645eb4eb2b62a0ee9fe25a646) 
 
 
+<br>
 
-
-# 🛠 Tools
+## 🛠 Tools
 <p>
   <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=Next.js&logoColor=white">
   <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=Typescript&logoColor=white"> 
+  <img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?style=for-the-badge&logo=TailwindCSS&logoColor=white">
   
 <br>
-<img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?style=for-the-badge&logo=TailwindCSS&logoColor=white">
+
  <img src="https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=white">
   <img src="https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=ESLint&logoColor=white">
    <img src="https://img.shields.io/badge/JSON Web Tokens-000000?style=for-the-badge&logo=JSON Web Tokens&logoColor=white">
@@ -178,107 +213,99 @@
 
 <br>
 
-
+## 👍 사용 이유
 
 ### Next.js + Typescript
 
-<li>SSR방식을 사용함으로써 SEO(검색엔진최적화)에 유리</li>
-<li>컴파일 단계에서 타입 관련 에러를 막을 수 있으며, 크로스 브라우징(브라우저 호환성) 문제 해결</li>
+- SSR방식을 사용함으로써 SEO(검색엔진최적화)에 유리
+- 컴파일 단계에서 타입 관련 에러를 막을 수 있으며, 크로스 브라우징(브라우저 호환성) 문제 해결
 
 ### Node.js + Express
 
-<li>내장 HTTP 서버 라이브러리를 포함하고 있어 웹 서버에서 아파치 등의 별도의 소프트웨어 없이 동작하는 것이 가능</li>
-<li> Javascript 언어로 Front-end 뿐만 아니라 Back-end 개발 환경을 구성할 수 있기에 생산성이 높고 러닝 커브가 줄어듦</li>
-<li>일련의 강력한 기능을 제공하며 라우팅과 미들웨어 기반으로 간결하고 유연하게 웹서버를 구현할 수 있음</li>
+- 내장 HTTP 서버 라이브러리를 포함하고 있어 웹 서버에서 아파치 등의 별도의 소프트웨어 없이 동작하는 것이 가능
+- Javascript 언어로 Front-end 뿐만 아니라 Back-end 개발 환경을 구성할 수 있기에 생산성이 높고 러닝 커브가 줄어듦
+- 일련의 강력한 기능을 제공하며 라우팅과 미들웨어 기반으로 간결하고 유연하게 웹서버를 구현할 수 있음
 
 ### PostgreSQL & TypeORM
-<li>복잡한 쿼리와 대규모 데이터베이스를 다룰 수 있는 기능이 풍부한 데이터베이스이며, 빠르고 유연한 개발이 가능
-</li>
-<li> Node.js 에서 작동하며 항상 최신 JS,TS 기능을 지원하고 다양한 데이터 베이스를 지원하며, 
+- 복잡한 쿼리와 대규모 데이터베이스를 다룰 수 있는 기능이 풍부한 데이터베이스이며, 빠르고 유연한 개발이 가능
+- Node.js 에서 작동하며 항상 최신 JS,TS 기능을 지원하고 다양한 데이터 베이스를 지원하며, 
 코드에 entities와 함께 작업 가능</li>
 
 
+### Axios & useSWR
+- response timeout 처리가 가능하며, Promise 기반으로 만들어져 데이터를 다루기 편리함
+- 여러 컴포넌트들에 모두 동일한 원격의 상태를 공유하며, 캐시된 데이터를 이용하여 효율적인 동작을 만들어냄. 데이터를 가져오는데 특화.
 
-###  ✏️ ESLint & Prettier
+<br>
 
-```
-module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    node: true,
-  },
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
-  plugins: ['prettier', '@typescript-eslint'],
-  rules: {
-    'prettier/prettier': [
-      'error',
-      {
-        singleQuote: true,
-        semi: true,
-        useTabs: false,
-        tabWidth: 2,
-        printWidth: 80,
-        bracketSpacing: true,
-        arrowParens: 'avoid',
-      },
-    ],
-  },
-  parserOptions: {
-    parser: '@typescript-eslint/parser',
-  },
-};
 
-```
-
-### Django Convention
-  
-### Git Commit Convention
-
- 
 # 🔥 Issue & TroubleShooting
 
-###  👉 Code Splitting
-**Issue:** 
-**trouble shooting**:
-  
-  
-### 👉 SOP & CORS
-**Issue:** 프론트엔드에서 테스팅하는 포트와 백엔드 서버의 포트가 달라서 Same Orgin Policy에 의해 리소스와 상호작용하는 것이 제한
-  </br>
-**trouble shooting**: 서버에 CORS 설정하여 프론트엔드의 도메인을 추가하여 프론트엔드에서의 데이터 요청이라도 서버 단에서 데이터 접근 권한을 허용.
+####  👉 재사용성 높이기
+- **Issue**  
+  - 회원정보는 어느 컴포넌트에서나 자주 쓰이는 데이터. 따라서, 상위 컴포넌트에서 최하위컴포넌트까지 props로 정보를 전달하는 경우 발생
+- **trouble shooting**
+  - **Context**에 담아 재사용성을 높이고, **Reducer**를 통하여 관리하고 dispatch를 통해 데이터를 업데이트.
+---
+####  👉 Foreign key constraint
+- **Issue**
+  -  커뮤니티, 게시글, 댓글을 삭제하는 과정에서 외래키 참조에 대한 에러 발생.
+- **trouble shooting** 
+  - 테이블마다 외래키를 통해 연관관계를 맺고 있기 때문이다. 따라서, **CASCADE문**을 사용하여 삭제시 참조되는 테이블에서도 업데이트가 이루어지게 한다.
 
-### 👉 CSRF
-**Issue:** Django는 기본적으로 csrf token을 사용하여 수정,삭제,등록 등의 행위에 대해 유효성 검증을 한다. 따라서 클라이언트 단에서의 게시글 수정,작성,삭제에 대한 유효성 검증을 하고 검증 오류시 403 Forbidden Response 반환한다.
-  </br>
-**trouble shooting**: 외부의 서버로 http통신할 때 axios를 사용하였고, axios로 call 보내고 response 받을 때 csrt token을 설정.
+```
+// Example
+@ManyToOne(() => Post, post => post.comments, {
+    nullable: false,
+    onDelete: 'CASCADE',
+  })
+```
+---
+####  👉 미들웨어 생성하기
+- **Issue** 
+  - route 생성시 대부분의 기능들이 사용자 인증에 대한 핸들러를 사용
+- **trouble shooting**
+   - 중복적으로 사용되는 핸들러를 재사용하기 위하여 **미들웨어**로 분리
+  - User Middleware : 여러 핸들러에서 유저 정보를 제공
+  - Auth Middleware : 유저 정보 또는 유저 등급에 따른 인증 제공
 
-### 👉 새로고침 시 state값 날아가는 현상
-**Issue:** 새로고침 시 reducer에 던달된 값들이 날아가버리고, 해당 컴포넌트에는 전달된 값들이 존재하지 않게 되고 컴포넌트 업데이트 시 값들이 존재하지 않는다는 에러가 발생.
-</br>
-**trouble shooting**: redux-persist를 사용하여 reducer 값들을 localStorage 또는 session에 저장하여 새로고침하여도 저장공간에 있는 데이터를 redux에 불러온다.
+---
+####  👉 Infinite Scroll
+- **Issue** 
+  - 수많은 게시글에 대한 데이터 출력
+- **trouble shooting**
+   - **useSWRInfinite**을 통해서 페이지를 스크롤하는 동작에 반응하여 자동으로 필요한 데이터를 불러오는 기능을 구현
+   - 페이지의 끝이라는 특정지점에 도달하는지 관찰하기 위해 **Intersection Observer API**을 사용
+
+<br>
+
+ 
+<br>
 
 
-> 📎 상세내용 : [Issue & TroubleShooting](https://velog.io/@pjh1011409/%EC%9D%B4%EC%8A%88-%ED%8A%B8%EB%9F%AC%EB%B8%94-%EC%8A%88%ED%8C%85)
-  
-# ⚒ Refectoring
-
-### 👉 중복되는 useState, onChange
-
-**Before:** form 태그에 글자를 작성하기 위한 onChange가 각각 필요하였고, 글자를 저장하기 위한 useState가 각각 필요하였다.
-</br>
-**After:** useState의 상태값에 객체로 값이 들어가게 하여 값들을 비구조화 할당으로 나눈다. onChange 또한 name과 value로 비구조화 할당하여 나누어준다.
 
 
-### 👉 Barrel Structure & 절대경로
+## 🎥 GIF
+**메인페이지(무한스크롤)**|**회원가입 & 로그인**
+:--------:|:--------:|
+![메인페잊](https://user-images.githubusercontent.com/81337674/208297127-35ba136d-c09b-4aeb-8390-d43418bda54b.gif)|![회원가입,로그인](https://user-images.githubusercontent.com/81337674/208295695-59842dd7-bb7b-4c56-944b-189cfbfb3e48.gif)
+**커뮤니티**|**게시글**
+![커뮤니티](https://user-images.githubusercontent.com/81337674/208297879-fd1d7add-cc87-4d6a-8357-ae12dc3c64a3.gif)|![게시글](https://user-images.githubusercontent.com/81337674/208297597-aad3822d-dc7f-49be-a050-87f6f7b3b8fb.gif)
+**댓글**|**좋아요**
+![댓글](https://user-images.githubusercontent.com/81337674/208297434-b14d36f8-10ff-4b91-a97e-1159d2c62e89.gif)|![좋아요](https://user-images.githubusercontent.com/81337674/208297700-f7db3b27-a7e0-4425-b016-e0a80ce792d4.gif)
+**사용자페이지**|**검색하기**
+![사용자페이지](https://user-images.githubusercontent.com/81337674/208297917-af174774-15a4-436f-85cc-02897327dc63.gif)|![검색](https://user-images.githubusercontent.com/81337674/208298068-86bc997c-1c74-462a-8234-3ceb61a858a6.gif)
 
-**Before:** 컴포넌트를 import해올 경우 상대경로로 각각 위치한 경로애서 가져와야 했고, 상대경로로 표시하여 ../ 지옥으로 작성되었다.
-</br>
-**After:** index.js를 각각의 폴더에 작성하여 depth를 얕게 만들어 컴포넌트들을 묶음으로 import해올 수 있고, jsconfig.json을 작성하여 절대경로를 사용하였다.
+<br>
 
-> 📎 상세내용 :[Code Refactoring](https://velog.io/@pjh1011409/Code-Refactoring)(velog)
+ 
+<br>
+
+## ✚ 추가하고 싶은 기능
+
+1️⃣  검색기능을 frontend에서의 filter, includes 을 통한 데이터 처리가 아닌, backend에서 입력한 값에 대한 데이터를 불러오는 방식으로 변환
+
+2️⃣ 텍스트 에디터를 추가하여 편리하고 유용한 게시글 작성 
+
+3️⃣ 카카오 로그인 API을 사용하여 간편로그인 구현
 
