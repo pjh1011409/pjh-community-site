@@ -10,7 +10,6 @@
 2022.11.18 ~ 2022.12.18
   <br>
 ## 📎 Link
-- Project homepage: 
 
 <br>
 
