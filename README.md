@@ -1,18 +1,20 @@
-# 🐶 POP(Prod of pets) 🐱
+## 🐶 POP(Prod of pets) 🐱
 <strong>애완동물을 자랑스럽게!</strong>
+<br>
 <strong>자신의 펫을 마음껏 자랑하고, 펫지식을 공유하는 커뮤니티 사이트입니다.</strong>
 
+<br>
 
-
-# 🗓 프로젝트 기간
+## 🗓 프로젝트 기간
 
 2022.11.18 ~ 2022.12.18
   <br>
-# 📎 Link
+## 📎 Link
 - Project homepage: 
 
 <br>
-# 🍀 나의 개발일지
+
+## 🍀 나의 개발일지
 
 <details>
 <summary>✏️ 프로젝트를 개발하며 작성한 개발블로그입니다.</summary>
@@ -36,7 +38,8 @@
  
   
 <br>
-# ⚙️ 주요 기능 
+
+## ⚙️ 주요 기능 
 
 - ##### 회원가입, 로그인 및 인증 🔐
   
@@ -72,14 +75,15 @@
 
 
 <br>
-# 💻 Service Architecture
+
+## 💻 Service Architecture
 
 <img width="800" alt="POP Structure" src="https://user-images.githubusercontent.com/81337674/208282368-622266b2-aa26-451f-95f5-412053261077.png">
 
 
 <br>
 
-# 📄 Project Architecture
+## 📄 Project Architecture
 
 #### Client
 
@@ -167,20 +171,23 @@
 <br>
 
 
-# ER Diagram
+## ER Diagram
 
 <img width="869" alt="POP ERD" src="https://user-images.githubusercontent.com/81337674/208286887-a145c447-52ba-4c50-88a1-2927f0177ee6.png">
 
 <br>
 
+## 📡 API 설계
+
+#### 📎 [POP API 명세서 ( Notion )](https://www.notion.so/POP-Proud-of-Pets-API-abc32bae15f944a3bd9a57c93ec6a11e#8a6f745645eb4eb2b62a0ee9fe25a646) 
+
 # 📡 API 설계
 
 #### 📎 [POP API 명세서 ( Notion )](https://www.notion.so/POP-Proud-of-Pets-API-abc32bae15f944a3bd9a57c93ec6a11e#8a6f745645eb4eb2b62a0ee9fe25a646) 
 
-
 <br>
 
-# 🛠 Tools
+## 🛠 Tools
 <p>
   <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=Next.js&logoColor=white">
   <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=Typescript&logoColor=white"> 
@@ -298,7 +305,7 @@
  
 <br>
 
-# ✚ 추가하고 싶은 기능
+## ✚ 추가하고 싶은 기능
 
 1️⃣  검색기능을 frontend에서의 filter, includes 을 통한 데이터 처리가 아닌, backend에서 입력한 값에 대한 데이터를 불러오는 방식으로 변환
 
