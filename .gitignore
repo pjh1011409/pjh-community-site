@@ -4,3 +4,4 @@ data
 .env.development
 .env.production
 .env.*
+.env
