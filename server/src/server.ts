@@ -15,7 +15,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 const app = express();
-const origin = process.env.ORIGIN;
+const origin = 'https://pjh-community-site.vercel.app';
 
 app.use(cors({ origin, credentials: true }));
 app.use(express.json());
