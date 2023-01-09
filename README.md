@@ -77,7 +77,7 @@
 
 ## 💻 Service Architecture
 
-<img width="800" alt="POP Structure" src="https://user-images.githubusercontent.com/81337674/208282368-622266b2-aa26-451f-95f5-412053261077.png">
+<img width="800" alt="POP Structure" src="https://user-images.githubusercontent.com/81337674/211320163-94f6488d-1d58-468c-b94a-d5a29e9a948a.png">
 
 
 <br>
@@ -180,9 +180,7 @@
 
 #### 📎 [POP API 명세서 ( Notion )](https://www.notion.so/POP-Proud-of-Pets-API-abc32bae15f944a3bd9a57c93ec6a11e#8a6f745645eb4eb2b62a0ee9fe25a646) 
 
-# 📡 API 설계
 
-#### 📎 [POP API 명세서 ( Notion )](https://www.notion.so/POP-Proud-of-Pets-API-abc32bae15f944a3bd9a57c93ec6a11e#8a6f745645eb4eb2b62a0ee9fe25a646) 
 
 <br>
 
@@ -304,7 +302,7 @@
  
 <br>
 
-## ✚ 추가하고 싶은 기능
+## ✚ 추가해볼 기능
 
 1️⃣  검색기능을 frontend에서의 filter, includes 을 통한 데이터 처리가 아닌, backend에서 입력한 값에 대한 데이터를 불러오는 방식으로 변환
 
