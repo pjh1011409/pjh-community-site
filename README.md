@@ -11,6 +11,8 @@
   <br>
 ## 📎 Link
 
+**Notion**
+👉 [Notion Portfolio](https://www.notion.so/POP-Proud-of-Pets-2df286b031e74e20b089270d9d802f4e)
 <br>
 
 ## 🍀 나의 개발일지
