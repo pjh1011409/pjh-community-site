@@ -220,7 +220,7 @@
 
 ### Next.js + Typescript
 
-- SSR방식을 사용함으로써 SEO(검색엔진최적화)에 유리
+- React.js를 서버측에서 pre-rendering하여 html을 생성하고, 브라우저에게 보내주는 SSR방식의 개발을 진행해보고 싶었다.
 - 컴파일 단계에서 타입 관련 에러를 막을 수 있으며, 크로스 브라우징(브라우저 호환성) 문제 해결
 
 ### Node.js + Express
