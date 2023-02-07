@@ -23,7 +23,7 @@
 
 <br>
 
-##💡 Intro
+## 💡 Intro
 
 <strong>애완동물을 자랑스럽게!</strong>
 <br>
