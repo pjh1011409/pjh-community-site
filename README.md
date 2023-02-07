@@ -1,4 +1,29 @@
 ## 🐶 POP(Prod of pets) 🐱
+
+<p align="center"> 
+💡 Intro &nbsp; <strong>|</strong> &nbsp;
+🗓 프로젝트 기간&nbsp; <strong>|</strong> &nbsp;
+📎 Link &nbsp; <strong>|</strong> &nbsp;
+🍀 나의 개발일지 &nbsp; <strong>|</strong> &nbsp; 
+⚙️ 주요 기능 &nbsp; <strong>|</strong> &nbsp; 
+💻 Service Architecture
+</p>
+<p align="center"> 
+📄 Project Architecture &nbsp; <strong>|</strong> &nbsp;
+🗾 ER Diagram  &nbsp; <strong>|</strong> &nbsp;
+📡 API 설계 &nbsp; <strong>|</strong> &nbsp;
+🛠 Tools &nbsp; <strong>|</strong> &nbsp;
+👍 사용 이유 &nbsp; <strong>|</strong> &nbsp;
+🔥 Issue & TroubleShooting &nbsp; <strong>|</strong> &nbsp;
+🎥 GIF
+<br></p>
+
+---
+
+<br>
+
+##💡 Intro
+
 <strong>애완동물을 자랑스럽게!</strong>
 <br>
 <strong>자신의 펫을 마음껏 자랑하고, 펫지식을 공유하는 커뮤니티 사이트입니다.</strong>
@@ -86,8 +111,9 @@
 
 ## 📄 Project Architecture
 
-#### Client
 
+<details>
+<summary> <strong>Client </strong> </summary>
 ```
 ⭐️ src
 |
@@ -139,7 +165,12 @@
 │
 └── 🗂 styles - 📄 globals.css
 ```
-#### Server
+</details>
+
+
+
+<details>
+<summary> <strong>Server </strong> </summary>
 ```
 ⭐️ src
 |
@@ -167,12 +198,14 @@
 │
 └── 🗂 utils - 📄 helpers.tsx
 ```
+</details>
+
 
 
 <br>
 
 
-## ER Diagram
+## 🗾 ER Diagram
 
 <img width="869" alt="POP ERD" src="https://user-images.githubusercontent.com/81337674/208286887-a145c447-52ba-4c50-88a1-2927f0177ee6.png">
 
@@ -220,7 +253,7 @@
 
 ### Next.js + Typescript
 
-- React.js를 서버측에서 pre-rendering하여 html을 생성하고, 브라우저에게 보내주는 SSR방식의 개발을 진행해보고 싶었다.
+- SSR방식을 사용함으로써 SEO(검색엔진최적화)에 유리
 - 컴파일 단계에서 타입 관련 에러를 막을 수 있으며, 크로스 브라우징(브라우저 호환성) 문제 해결
 
 ### Node.js + Express
