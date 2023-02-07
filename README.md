@@ -13,7 +13,8 @@
 🗾 ER Diagram  &nbsp; <strong>|</strong> &nbsp;
 📡 API 설계 &nbsp; <strong>|</strong> &nbsp;
 🛠 Tools &nbsp; <strong>|</strong> &nbsp;
-👍 사용 이유 &nbsp; <strong>|</strong> &nbsp;
+👍 사용 이유 
+<p align="center"> 
 🔥 Issue & TroubleShooting &nbsp; <strong>|</strong> &nbsp;
 🎥 GIF
 <br></p>
